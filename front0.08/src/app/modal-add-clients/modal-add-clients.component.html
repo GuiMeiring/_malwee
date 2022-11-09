@@ -1,0 +1,96 @@
+
+<mat-tab-group>
+  <mat-tab label="Cadastro">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="Nome" [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="CNPJ" type="text" [(ngModel)]="cnpj">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="Razão Social" [(ngModel)]="razaoSocial">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Cliente desde de </mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
+    <mat-card-actions>
+      <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+    </mat-card-actions>
+  </mat-tab>
+  <mat-tab label="Endereço"> 
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="CEP" [(ngModel)]="cep">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="Número" type="number" [(ngModel)]="numero">
+    </mat-form-field>
+    <mat-form-field class="example-25-width" appearance="fill">
+      <input matInput placeholder="Rua" [(ngModel)]="rua">
+    </mat-form-field>
+    <mat-form-field class="example-25-width" appearance="fill">
+      <input matInput placeholder="Bairro" [(ngModel)]="bairro">
+    </mat-form-field>
+    <mat-form-field class="example-25-width" appearance="fill">
+      <input matInput placeholder="Cidade" [(ngModel)]="cidade">
+    </mat-form-field>
+    <mat-form-field class="example-25-width" appearance="fill">
+      <input matInput placeholder="Estado" [(ngModel)]="estado">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="Ponto de referência" [(ngModel)]="pontoDeReferencia">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="Complemento" [(ngModel)]="complemento">
+    </mat-form-field>
+    <mat-card-actions>
+      <button  mat-raised-button color="primary" (click)="addEndereco()" >Adicionar</button>
+      <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+    </mat-card-actions>
+
+  </mat-tab>
+  <mat-tab label="Lista de endereços">
+    <br>
+    <mat-card-actions>
+      <br>
+        <table>
+          <tr>
+            <th>CEP</th>
+            <th>Rua</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Número</th>
+            <th>Complemento</th>
+            <th>Ponto de referência</th>
+          </tr>
+          <tr  *ngFor="let enderecos of enderecos">
+            <td>{{enderecos.cep}}</td>
+            <td>{{enderecos.rua}}</td>
+            <td>{{enderecos.bairro}}</td>
+            <td>{{enderecos.cidade}}</td>
+            <td>{{enderecos.estado}}</td>
+            <td>{{enderecos.numero}}</td>
+            <td>{{enderecos.complemento}}</td>
+            <td>{{enderecos.pontoDeReferencia}}</td>
+          </tr>
+        </table>
+        <br>
+        <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+    </mat-card-actions>
+  </mat-tab>
+  <mat-tab label="Confirmar">
+    <br>
+    <mat-card-content>
+      <h1>Deseja cadstrar esse cliente? </h1>
+    </mat-card-content>
+    <mat-card-actions>
+      <button  mat-raised-button color="primary" (click)="clientAdd()" >Cadastrar</button>
+      <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+    </mat-card-actions>
+  </mat-tab>
+</mat-tab-group>
+

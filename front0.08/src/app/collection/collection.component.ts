@@ -53,6 +53,7 @@ export class CollectionComponent implements OnInit {
 
     async listarCollection(){
       this.collection= await this.httpService.get('collection');
+      console.log(this.collection);
 
 
     }

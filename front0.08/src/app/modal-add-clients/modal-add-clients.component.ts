@@ -12,10 +12,20 @@ import { HttpService } from 'src/services/HttpService';
 })
 export class ModalAddClientsComponent implements OnInit {
   client: Array <any>=[];
+  enderecos: Array <any>=[];
   name: string ='';
   cnpj: string ='';
   razaoSocial: string ='';
   startDate : Date = new Date(2022, 0, 1);
+complemento: string ='';
+pontoDeReferencia:string ='';
+bairro: string ='';
+rua: string ='';
+numero: number | undefined;
+cep: string ='';
+cidade: string ='';
+estado: string ='';
+
 
   constructor(public dialogRef: MatDialogRef<ModalAddClientsComponent>, private httpService : HttpService) { }
 
@@ -25,8 +35,19 @@ export class ModalAddClientsComponent implements OnInit {
     this.dialogRef.close();
   }
   async clientAdd() {
-    this.client= await this.httpService.post('client', { name: this.name, cnpj: this.cnpj, razaoSocial: this.razaoSocial, dateClient: this.startDate});
+    this.client= await this.httpService.post('client', { name: this.name, cnpj: this.cnpj, razaoSocial: this.razaoSocial, dateClient: this.startDate, adddress:this.enderecos});
     this.onNoClick();
+    }
+    async addEndereco(){
+      this.enderecos.push({"rua":this.rua,"bairro":this.bairro,
+      "cidade":this.cidade,
+      "estado":this.estado,
+      "cep":this.cep,
+      "numero":this.numero,
+      "complemento":this.complemento,
+      "pontoDeReferencia":this.pontoDeReferencia})
+      console.log(this.enderecos);
+
     }
 
 }

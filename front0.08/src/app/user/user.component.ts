@@ -29,7 +29,7 @@ add: any;
   }
   postClientModal(): void {
     const ref = this.dialog.open(ModalAddClientsComponent, {
-      width: '600px',
+      width: '900px',
     });
     ref.afterClosed().subscribe(result => {
       this.listaClients();
@@ -47,6 +47,7 @@ add: any;
     }
   async listaClients(){
     this.client= await this.httpService.get('client');
+    console.log(this.client);
 
 
   }
