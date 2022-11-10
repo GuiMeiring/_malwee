@@ -14,16 +14,23 @@ mat-card-content{
     border-collapse: collapse;
     width: 100%;
 }
+th {
+  padding: 8px;
+  text-align: center;
+  color:rgba(47,117,229,255);
+  border-bottom: 3px solid rgba(47,117,229,255)
 
-th, td {
+}
+
+td {
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
 
 }
 th:hover{
-    color:rgba(47,117,229,255);
-  border-bottom: 3px solid rgba(47,117,229,255)
+    color:rgba(144,108,255,255);
+  border-bottom: 3px solid rgba(144,108,255,255);
     
 }
 td:hover{

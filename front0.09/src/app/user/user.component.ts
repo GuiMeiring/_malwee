@@ -37,7 +37,7 @@ add: any;
   }
   public editClientModal(client: any, id: any) {
     const ref = this.dialog.open(ModalClientComponent, {
-      width: '700px',
+      width: '900px',
       data: {client: client, id : id}
 
     });
