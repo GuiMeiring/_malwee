@@ -5,6 +5,8 @@ import { HttpService } from 'src/services/HttpService';
 export interface DialogDataClient {
   client : Array<any>;
   id: number;
+  razaoSocial: string;
+  name: string;
 }
 
 @Component({
@@ -15,7 +17,7 @@ export interface DialogDataClient {
 export class ModalClientComponent implements OnInit {
   client: Array<any>=[];
   endereco: Array<any>=[];
-  newEndereco: Array<any>=[];
+  editEndereco: Array<any>=[];
   name: string ='';
   cnpj: number | undefined;
   razaoSocial: string ='';
@@ -28,6 +30,7 @@ export class ModalClientComponent implements OnInit {
   complemento: string ='';
   numero: string ='';
   cep: string ='';
+  selectedEndereco: number=0;
 
 
 
@@ -44,7 +47,7 @@ export class ModalClientComponent implements OnInit {
     this.dialogRef.close();
   }
   async editClient(){
-    this.client= await this.httpService.put(`client`,{name:this.name,cnpj: this.cnpj,razaoSocial: this.razaoSocial, dateClient:  this.startDate, id : this.data.id});
+    this.client= await this.httpService.put(`client`,{name:this.name,razaoSocial: this.razaoSocial, idClient  : this.data.id, address: this.editEndereco, idEndereco : this.selectedEndereco});
     this.dialogRef.close();
   }
   async getClient(){
@@ -55,16 +58,31 @@ export class ModalClientComponent implements OnInit {
     this.client= await this.httpService.patch(`client/${this.data.id}`,{});
     this.dialogRef.close();
   }
+  public put(){
+    if(this.name ==''){
+      this.name= this.data.name;
+    }
+    if(this.razaoSocial==''){
+      this.razaoSocial= this.data.razaoSocial;
+    }
+    console.log(this.name);
+    console.log(this.razaoSocial);
+    this.editClient();
+  }
+  
   async addEndereco(){
-    this.newEndereco.push({"rua":this.rua,"bairro":this.bairro,
+    this.editEndereco.push({"id":this.selectedEndereco,"rua":this.rua,"bairro":this.bairro,
     "cidade":this.cidade,
     "estado":this.estado,
     "cep":this.cep,
     "numero":this.numero,
     "complemento":this.complemento,
     "pontoDeReferencia":this.pontoDeReferencia})
-    console.log(this.newEndereco);
+    console.log(this.editEndereco);
 
+  }
+  console(){
+    console.log(this.selectedEndereco);
   }
 }
 

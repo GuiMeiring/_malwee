@@ -8,6 +8,8 @@ import { ModalClientComponent } from '../modal-client/modal-client.component';
 export interface DialogDataClient {
   client : Array<any>;
   id: number;
+  razaoSocial: string;
+  name: string;
 }
 @Component({
   selector: 'app-user',
@@ -35,10 +37,10 @@ add: any;
       this.listaClients();
     })
   }
-  public editClientModal(client: any, id: any) {
+  public editClientModal(client: any, id: any, razaoSocial: any, name: any) {
     const ref = this.dialog.open(ModalClientComponent, {
       width: '900px',
-      data: {client: client, id : id}
+      data: {client: client, id : id, razaoSocial: razaoSocial, name: name}
 
     });
     ref.afterClosed().subscribe(result => {

@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
             type : Sequelize.INTEGER.UNSIGNED,
             primaryKey : true,
             autoIncrement : true,
-            allowNull : false
+            allowNull : true
         },
         status:{
             type : Sequelize.INTEGER,

@@ -18,9 +18,9 @@
       <tr  *ngFor="let clients of client | filter : search">
 
 
-          <td (click)="editClientModal(clients,clients.id)">{{clients.id}}</td>
-          <td (click)="editClientModal(clients,clients.id)">{{clients.name}}</td>
-          <td (click)="editClientModal(clients,clients.id)">{{clients.cnpj}}</td>
+          <td (click)="editClientModal(clients,clients.id, clients.name, this.clients.razaoSocial)">{{clients.id}}</td>
+          <td (click)="editClientModal(clients,clients.id,clients.name, this.clients.razaoSocial)">{{clients.name}}</td>
+          <td (click)="editClientModal(clients,clients.id, clients.name, this.clients.razaoSocial)">{{clients.cnpj}}</td>
           <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
       </tr>
      </table>
