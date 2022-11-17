@@ -1,4 +1,4 @@
-mat-card-content{
+mat-card-content, mat-card-actions{
   text-align: center;
 }
 .example-form {
@@ -12,31 +12,41 @@ mat-card-content{
 }
 .example-25-width {
   width: 25%;
+  margin-right: 8px;
+}
+.example-30-width {
+  width: 30%;
+  margin-left: 10px;
+}
+.example-20-width {
+  width: 20%;
+  margin-left: 10px;
+}
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
 }
 table {
   border-collapse: collapse;
   width: 100%;
 }
-th {
-padding: 8px;
-text-align: center;
-color:rgba(47,117,229,255);
-border-bottom: 3px solid rgba(47,117,229,255)
 
-}
-
-td {
+th, td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid #ddd;
 
 }
 th:hover{
-  color:rgba(144,108,255,255);
-border-bottom: 3px solid rgba(144,108,255,255);
-  
+  color:rgba(47,117,229,255);
+border-bottom: 3px solid rgba(47,117,229,255)
+
 }
 td:hover{
 color:rgba(89,177,126,255);
 border-bottom: 3px solid rgba(89,177,126,255);
 }
+

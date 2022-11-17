@@ -80,7 +80,7 @@ export class ModalClientComponent implements OnInit {
     this.complemento='';
     this.pontoDeReferencia='';
   }
-  
+
   async addEndereco(){
     this.editEndereco.push({"id":this.selectedEndereco,"rua":this.rua,"bairro":this.bairro,
     "cidade":this.cidade,
@@ -93,7 +93,7 @@ export class ModalClientComponent implements OnInit {
     console.log(this.editEndereco);
 
   }
-  
+
   async DeleteEndereco(){
     this.endereco= await this.httpService.patch(`ClientsEndereco/${this.selectedEndereco}`,{});
     this.onNoClick();

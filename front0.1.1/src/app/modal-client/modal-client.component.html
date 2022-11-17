@@ -1,0 +1,139 @@
+<mat-tab-group>
+  <mat-tab label="Dados">
+      <mat-card-content>
+        <br>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Razão Social</th>
+            <th>Cliente desde matDatepicker</th>
+            <th>Criado em </th>
+            <th>Atualizado em </th>
+          </tr>
+          <tr  *ngFor="let clients of client">
+            <td>{{clients.id}}</td>
+            <td>{{clients.name}}</td>
+            <td>{{clients.cnpj}}</td>
+            <td>{{clients.razaoSocial}}</td>
+            <td>{{clients.dateClient}}</td>
+            <td>{{clients.createdAt}}</td>
+            <td>{{clients.updatedAt}}</td>
+            <td>{{clients.address}}</td>
+           <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
+          </tr>
+        </table>
+        <mat-card-actions>
+          <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+        </mat-card-actions>
+      </mat-card-content>
+  </mat-tab>
+  <mat-tab label="Tabela de endereços">
+    <mat-card-content>
+      <br>
+      <table>
+        <tr>
+          <th>CEP</th>
+          <th>Rua</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>Estado </th>
+          <th>Número</th>
+        </tr>
+        <tr  *ngFor="let endereco of endereco">
+          <td>{{endereco.cep}}</td>
+          <td>{{endereco.rua}}</td>
+          <td>{{endereco.bairro}}</td>
+          <td>{{endereco.cidade}}</td>
+          <td>{{endereco.estado}}</td>
+          <td>{{endereco.numero}}</td>
+
+         <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
+        </tr>
+      </table>
+      <mat-card-actions>
+        <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+      </mat-card-actions>
+    </mat-card-content>
+</mat-tab>
+<mat-tab label="Cadastro">
+  <mat-card-content>
+  <h2>Editar dados do cliente</h2>
+  <mat-form-field class="example-45-width" appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput  [(ngModel)]="name" maxlength="150" minlength="100">
+  </mat-form-field>
+  <mat-form-field class="example-45-width" appearance="fill">
+    <mat-label>Razão Social</mat-label>
+    <input matInput  [(ngModel)]="razaoSocial" maxlength="150" minlength="1">
+  </mat-form-field>
+  <hr>
+  <h2>Editar endereço da tabela de endereços</h2>
+  <br>
+  <app-dropdown [array]="endereco" [idField]="'id'" [textField]="'rua'" [title]="'Endereço'" [(ngModel)]="selectedEndereco"></app-dropdown>
+  <br>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>CEP</mat-label>
+    <input matInput  [(ngModel)]="cep" maxlength="8" minlength="8">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Número da casa</mat-label>
+    <input matInput  type="number" [(ngModel)]="numero">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Rua</mat-label>
+    <input matInput  [(ngModel)]="rua" maxlength="100" minlength="1">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Bairro</mat-label>
+    <input matInput  [(ngModel)]="bairro" maxlength="100" minlength="1">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Cidade</mat-label>
+    <input matInput [(ngModel)]="cidade" maxlength="100" minlength="1">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Estado</mat-label>
+    <input matInput [(ngModel)]="estado" maxlength="100" minlength="1">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Ponto de Referência</mat-label>
+    <input matInput  [(ngModel)]="pontoDeReferencia" maxlength="100" minlength="1">
+  </mat-form-field>
+  <mat-form-field class="example-20-width" appearance="fill">
+    <mat-label>Complemento</mat-label>
+    <input matInput  [(ngModel)]="complemento" maxlength="100" minlength="1">
+  </mat-form-field>
+  <mat-card-actions>
+    <button  mat-raised-button color="primary" (click)="addEndereco()" >Adicionar a tabela de endereços</button>
+    <button  mat-raised-button color="primary" (click)="DeleteEndereco()" >Excluir endereço</button>
+    <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+  </mat-card-actions>
+</mat-card-content>
+</mat-tab>
+        <mat-tab label="Confirmar edição" >
+          <mat-card-content>
+            <br>
+            <h1>Tem certeza que deseja editar esse cliente? </h1>
+            <br>
+            <br>
+            <mat-card-actions>
+              <button  mat-raised-button color="primary" (click)="put()" >Editar</button>
+              <button  mat-raised-button color="primary"  (click)="onNoClick()">Cancelar</button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-tab>
+      <mat-tab label="Deletar" >
+          <mat-card-content>
+            <br>
+            <h1>Tem certeza que deseja excluir esse cliente? </h1>
+            <br>
+            <br>
+            <mat-card-actions>
+              <button  mat-raised-button color="primary" (click)="deleteClient()" >Excluir</button>
+              <button  mat-raised-button color="primary"  (click)="onNoClick()">Cancelar</button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-tab>
+</mat-tab-group>
