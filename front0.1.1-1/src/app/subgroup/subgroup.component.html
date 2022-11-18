@@ -13,13 +13,13 @@
     <tr>
       <th>ID</th>
       <th>Descrição</th>
-      <th>ID do grupo</th>
+      <th>Grupo</th>
     </tr>
     <tr  *ngFor="let subgroup of subGroup  | filter : search">
         <td (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)">{{subgroup.id}}</td>
         <td (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)">{{subgroup.description}}</td>
-        <td (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)">{{subgroup.fkGroup}}</td>
-        <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
+        <td class="th"*ngFor="let groups of group" (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)"><b *ngIf="subgroup.fkGroup == groups.id">{{groups.description}}</b></td>
+       
     </tr>
    </table>
   </mat-card-content>

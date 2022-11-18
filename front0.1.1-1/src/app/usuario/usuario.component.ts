@@ -23,6 +23,7 @@ export class UsuarioComponent implements OnInit {
   password : string = "";
   cpassword : string = "";
 hide: any;
+hide2: any;
   constructor(private httpService : HttpService, public dialog: MatDialog) { }
 
   ngOnInit(): void {

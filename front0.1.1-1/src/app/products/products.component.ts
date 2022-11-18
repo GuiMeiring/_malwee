@@ -29,12 +29,18 @@ add: any;
 
 search: string='';
 products: Array <any>=[];
+group: Array <any>=[];
+subgroup: Array <any>=[];
+collection: Array <any>=[];
 
 
   constructor(private router : Router, private httpService: HttpService, public dialog : MatDialog) { }
 
   ngOnInit(): void {
     this.listarProducts();
+    this.listarGroup();
+    this.listarSubgroup();
+    this.listarCollection();
   }
   postModalProducts() {
     const ref = this.dialog.open(ModalAddProductsComponent, {
@@ -57,6 +63,22 @@ products: Array <any>=[];
     }
     async listarProducts(){
       this.products= await this.httpService.get('products');
+
+
+    }
+    async listarGroup(){
+      this.group= await this.httpService.get('group');
+  
+  
+    }
+    async listarSubgroup(){
+      this.subgroup= await this.httpService.get('subgroup');
+  
+  
+    }
+    async listarCollection(){
+      this.collection= await this.httpService.get('collection');
+      console.log(this.collection);
 
 
     }

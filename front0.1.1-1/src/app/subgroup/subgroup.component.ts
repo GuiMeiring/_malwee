@@ -18,6 +18,7 @@ export interface DialogDataSubGroup {
 })
 export class SubgroupComponent implements OnInit {
 edit: any;
+group: Array<any>= [];
 subGroup: Array<any>= [];
 search: string='';
 id: number=0;
@@ -30,6 +31,7 @@ fkGroup:number=0;
 
   ngOnInit(): void {
     this.listarSubgroup();
+    this.listarGroup();
   }
 
   EditSubgroupModal(subgroup:any,id:any,fkGroup:any): void {
@@ -56,5 +58,12 @@ fkGroup:number=0;
 
 
   }
+  async listarGroup(){
+    this.group= await this.httpService.get('group');
+
+
+  }
+  
+
 
 }

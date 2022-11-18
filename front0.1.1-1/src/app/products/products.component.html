@@ -14,18 +14,21 @@
       <th>ID</th>
       <th>Descrição</th>
       <th>Preço</th>
-      <th>ID Grupo</th>
-      <th>ID Sub-grupo</th>
-      <th>ID Coleção</th>
+      <th>Grupo</th>
+      <th>Sub-grupo</th>
+      <th>Coleção</th>
     </tr>
     <tr  *ngFor="let products of products | filter : search">
+     
         <td class="th" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )">{{products.id}}</td>
         <td class="th" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )">{{products.description}}</td>
         <td class="th" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )">R$ {{products.salePrice}}</td>
-        <td class="th" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )">{{products.fkGroup}}</td>
-        <td class="th" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )">{{products.fkSubGroup}}</td>
-        <td class="th" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )">{{products.fkCollection}}</td>
+        <td class="th"*ngFor="let groups of group" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )"><b *ngIf="products.fkGroup == groups.id">{{groups.description}}</b></td>
+        <td class="th"*ngFor="let subgroups of subgroup" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )"><b *ngIf="products.fkSubGroup == subgroups.id">{{subgroups.description}}</b></td>
+        <td class="th"*ngFor="let collections of collection" (click)="modalEditar(products, products.id,products.fkGroup,products.fkSubGroup,products.fkCollection )"><b *ngIf="products.fkCollection == collections.id">{{collections.description}}</b></td>
+      
       </tr>
+    
 
    </table>
   </mat-card-content>

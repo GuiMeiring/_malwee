@@ -37,7 +37,7 @@ add: any;
       this.listaClients();
     })
   }
-  public editClientModal(client: any, id: any, razaoSocial: any, name: any) {
+  public editClientModal(client: any, id: any, name: any, razaoSocial: any) {
     const ref = this.dialog.open(ModalClientComponent, {
       width: '900px',
       data: {client: client, id : id, razaoSocial: razaoSocial, name: name}

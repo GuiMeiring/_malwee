@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HttpService } from 'src/services/HttpService';
+import { ModalEditAddressComponent } from '../modal-edit-address/modal-edit-address.component';
 export interface DialogDataClient {
   client : Array<any>;
   id: number;
@@ -15,6 +16,7 @@ export interface DialogDataClient {
   styleUrls: ['./modal-client.component.scss']
 })
 export class ModalClientComponent implements OnInit {
+
   client: Array<any>=[];
   endereco: Array<any>=[];
   editEndereco: Array<any>=[];
@@ -30,14 +32,16 @@ export class ModalClientComponent implements OnInit {
   complemento: string ='';
   numero: string ='';
   cep: string ='';
-  selectedEndereco: number=0;
+  selectedEndereco: number =0;
+
 
 
 
 
 
   constructor(public dialogRef: MatDialogRef<ModalClientComponent>, private httpService : HttpService,
-    @Inject(MAT_DIALOG_DATA) private data : DialogDataClient) { }
+    @Inject(MAT_DIALOG_DATA) private data : DialogDataClient,
+    private dialog : MatDialog) { }
 
   ngOnInit(): void {
     this.client.push(this.data.client);
@@ -48,7 +52,6 @@ export class ModalClientComponent implements OnInit {
   }
   async editClient(){
     this.client= await this.httpService.put(`client`,{name:this.name,razaoSocial: this.razaoSocial, idClient  : this.data.id, address: this.editEndereco, idEndereco : this.selectedEndereco});
-    this.dialogRef.close();
   }
   async getClient(){
     this.endereco= await this.httpService.get(`client/${this.data.id}`);
@@ -67,6 +70,7 @@ export class ModalClientComponent implements OnInit {
     }
     console.log(this.name);
     console.log(this.razaoSocial);
+    this.addAddress();
     this.editClient();
   }
   public refresh(){
@@ -81,7 +85,7 @@ export class ModalClientComponent implements OnInit {
     this.pontoDeReferencia='';
   }
 
-  async addEndereco(){
+  async addAddress(){
     this.editEndereco.push({"id":this.selectedEndereco,"rua":this.rua,"bairro":this.bairro,
     "cidade":this.cidade,
     "estado":this.estado,
@@ -89,15 +93,28 @@ export class ModalClientComponent implements OnInit {
     "numero":this.numero,
     "complemento":this.complemento,
     "pontoDeReferencia":this.pontoDeReferencia})
-    this.refresh();
-    console.log(this.editEndereco);
 
   }
-
-  async DeleteEndereco(){
-    this.endereco= await this.httpService.patch(`ClientsEndereco/${this.selectedEndereco}`,{});
-    this.onNoClick();
+  openDialog(id: any){
+    window.localStorage.setItem('idAddressEdit', id);
+    const dialogoRef = this.dialog.open(ModalEditAddressComponent, {
+      width: '800px',
+    });
+    dialogoRef.afterClosed().subscribe((result : any) => {
+      this.getClient();
+    })
   }
+    
+  
+  async deleteAddress(id : any) {
+    this.endereco= await this.httpService.patch(`ClientsEndereco/${id}`,{});
+    this.getClient();
+   
+    }
+    cancelar(){
+      this.selectedEndereco=0;
+    }
+    
 }
 
 
