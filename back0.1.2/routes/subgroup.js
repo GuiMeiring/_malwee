@@ -32,18 +32,35 @@ knl.post('subgroup', async(req, resp) =>{
 })
 
 knl.get('subgroup', async(req, resp) => {
-    const result = await knl.sequelize().models.Subgroup.findAll({
+    let result = await knl.sequelize().models.Subgroup.findAll({
         where : {
             status : 1
         }
     });
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let subgrupo of result){
+            const group = await knl.sequelize().models.Group.findAll({
+                where : {
+                    id : subgrupo.fkGroup
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(group)){
+                subgrupo.group_description = group[0].description
+            }
+
+            console.log(subgrupo.group_description)
+        }
+    }
     
     resp.json(result);
     resp.end();
 })
 
 knl.get('subgroup/:id', async(req, resp) => {
-    const result = await knl.sequelize().models.Subgroup.findAll({
+    let result = await knl.sequelize().models.Subgroup.findAll({
         where : {
             id : req.params.id,
             status : 1

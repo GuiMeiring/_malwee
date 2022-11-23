@@ -1,11 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpService } from 'src/services/HttpService';
 
-
-export interface DialogDataAddress {
+export interface DialogDataClient {
+  client : Array<any>;
   id: number;
+  razaoSocial: string;
+  name: string;
 }
 
 @Component({
@@ -14,6 +16,7 @@ export interface DialogDataAddress {
   styleUrls: ['./modal-edit-address.component.scss']
 })
 export class ModalEditAddressComponent implements OnInit {
+  idEndereco: number | undefined;
   rua: string='';
   bairro: string ='';
   cidade: string='';
@@ -30,26 +33,20 @@ export class ModalEditAddressComponent implements OnInit {
   razaoSocial: string ='';
   startDate : Date = new Date(2022, 0, 1);
   
-  selectedEndereco: number =0;
 
-  constructor(public dialogRef: MatDialogRef<ModalEditAddressComponent>, private httpService : HttpService) { }
+  constructor(public dialogRef: MatDialogRef<ModalEditAddressComponent>, private httpService : HttpService,
+    @Inject(MAT_DIALOG_DATA) private data : DialogDataClient) { }
 
   ngOnInit(): void {
   }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
   public put(){
-   // if(this.name ==''){
-   //   this.name= this.data.name;
-   // }
-    //if(this.razaoSocial==''){
-   //   this.razaoSocial= //this.data.razaoSocial;
-   // }
-    console.log(this.name);
-    console.log(this.razaoSocial);
     this.addAddress();
     this.editClient();
   }
   public refresh(){
-    this.selectedEndereco=0;
     this.rua='';
     this.bairro='';
     this.cidade='';
@@ -61,7 +58,7 @@ export class ModalEditAddressComponent implements OnInit {
   }
 
   async addAddress(){
-    this.editEndereco.push({"id":this.selectedEndereco,"rua":this.rua,"bairro":this.bairro,
+    this.editEndereco.push({"id":localStorage.getItem("idAddressEdit"),"rua":this.rua,"bairro":this.bairro,
     "cidade":this.cidade,
     "estado":this.estado,
     "cep":this.cep,
@@ -71,10 +68,12 @@ export class ModalEditAddressComponent implements OnInit {
 
   }
   async editClient(){
-    this.client= await this.httpService.put(`client`,{name:this.name,razaoSocial: this.razaoSocial, idClient  : this.data.id, address: this.editEndereco, idEndereco : this.selectedEndereco});
-  }
-  cancelar(){
-    this.selectedEndereco=0;
+    console.log(this.data.name);
+    console.log(this.data.razaoSocial);
+    console.log(this.data.id);
+    
+    this.client= await this.httpService.put(`client`,{name:this.data.name,razaoSocial: this.data.razaoSocial, idClient  : this.data.id, address: this.editEndereco, idEndereco : localStorage.getItem("idAddressEdit")});
+  
   }
   
 

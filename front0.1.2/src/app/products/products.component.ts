@@ -38,9 +38,6 @@ collection: Array <any>=[];
 
   ngOnInit(): void {
     this.listarProducts();
-    this.listarGroup();
-    this.listarSubgroup();
-    this.listarCollection();
   }
   postModalProducts() {
     const ref = this.dialog.open(ModalAddProductsComponent, {

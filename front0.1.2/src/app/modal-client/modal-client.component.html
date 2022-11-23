@@ -88,11 +88,15 @@
         <td  (click)="openDialog(endereco.id)">
           <mat-icon>edit</mat-icon>
         </td>
-        <td (click)="deleteAddress(endereco.id)"> 
+        <td (click)="openDeleteAddress(endereco.id)"> 
           <mat-icon >delete</mat-icon>
         </td>
       </tr>
     </table>
+    <br>
+    <mat-card-actions>
+      <button  mat-raised-button color="primary" (click)="openAddAddress()" ><mat-icon>add</mat-icon></button>
+    </mat-card-actions>
     <hr>
     <mat-card-actions>
       <button  mat-raised-button color="primary" (click)="onNoClick()" >Fechar</button>

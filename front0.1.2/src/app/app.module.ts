@@ -36,6 +36,8 @@ import { ModalEditUserComponent } from './modal-edit-user/modal-edit-user.compon
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { ModalDeleteUserComponent } from './modal-delete-user/modal-delete-user.component';
 import { ModalEditAddressComponent } from './modal-edit-address/modal-edit-address.component';
+import { ModalDeleteAddressComponent } from './modal-delete-address/modal-delete-address.component';
+import { ModalAddAddressComponent } from './modal-add-address/modal-add-address.component';
 
 
 @NgModule({
@@ -66,7 +68,9 @@ import { ModalEditAddressComponent } from './modal-edit-address/modal-edit-addre
     ModalEditUserComponent,
     DropdownComponent,
     ModalDeleteUserComponent,
-    ModalEditAddressComponent
+    ModalEditAddressComponent,
+    ModalDeleteAddressComponent,
+    ModalAddAddressComponent
   ],
   imports: [
     RoutesModule,

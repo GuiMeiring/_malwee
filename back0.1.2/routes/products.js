@@ -46,11 +46,62 @@ knl.post('products', async(req, resp) =>{
 
 })
 knl.get('products', async (req, resp)=>{
-    const result =await knl.sequelize().models.Products.findAll({
+    let result =await knl.sequelize().models.Products.findAll({
         where: {
             status:1
         }
     });
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let products of result){
+            const group = await knl.sequelize().models.Group.findAll({
+                where : {
+                    id : products.fkGroup
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(group)){
+                products.group_description = group[0].description
+            }
+
+            console.log(products.group_description)
+        }
+    }
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let products of result){
+            const subgroup = await knl.sequelize().models.Subgroup.findAll({
+                where : {
+                    id : products.fkSubGroup
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(subgroup)){
+                products.subgroup_description = subgroup[0].description
+            }
+
+            console.log(products.subgroup_description)
+        }
+    }
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let products of result){
+            const collection = await knl.sequelize().models.Collection.findAll({
+                where : {
+                    id : products.fkCollection
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(collection)){
+                products.collection_description = collection[0].description
+            }
+
+            console.log(products.collection_description)
+        }
+    }
     resp.json(result);
     resp.end();
 })

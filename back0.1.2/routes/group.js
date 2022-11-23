@@ -32,6 +32,7 @@ knl.get('group', async (req, resp)=>{
             status:1
         }
     });
+    
     resp.json(result);
 })
 knl.get('group/:id', async (req, resp)=>{

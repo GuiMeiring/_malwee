@@ -18,7 +18,8 @@
     <tr  *ngFor="let subgroup of subGroup  | filter : search">
         <td (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)">{{subgroup.id}}</td>
         <td (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)">{{subgroup.description}}</td>
-        <td class="th"*ngFor="let groups of group" (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)"><b *ngIf="subgroup.fkGroup == groups.id">{{groups.description}}</b></td>
+        <td (click)=" EditSubgroupModal(subgroup,subgroup.id,subgroup.fkGroup)">{{subgroup.group_description}}</td>
+        
        
     </tr>
    </table>

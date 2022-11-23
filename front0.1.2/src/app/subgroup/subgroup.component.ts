@@ -31,7 +31,6 @@ fkGroup:number=0;
 
   ngOnInit(): void {
     this.listarSubgroup();
-    this.listarGroup();
   }
 
   EditSubgroupModal(subgroup:any,id:any,fkGroup:any): void {
@@ -55,11 +54,7 @@ fkGroup:number=0;
 
   async listarSubgroup(){
     this.subGroup= await this.httpService.get('subgroup');
-
-
-  }
-  async listarGroup(){
-    this.group= await this.httpService.get('group');
+    console.log(this.subGroup);
 
 
   }

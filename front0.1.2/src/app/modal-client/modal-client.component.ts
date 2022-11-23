@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HttpService } from 'src/services/HttpService';
+import { ModalAddAddressComponent } from '../modal-add-address/modal-add-address.component';
+import { ModalDeleteAddressComponent } from '../modal-delete-address/modal-delete-address.component';
 import { ModalEditAddressComponent } from '../modal-edit-address/modal-edit-address.component';
 export interface DialogDataClient {
   client : Array<any>;
@@ -98,12 +100,32 @@ export class ModalClientComponent implements OnInit {
   openDialog(id: any){
     window.localStorage.setItem('idAddressEdit', id);
     const dialogoRef = this.dialog.open(ModalEditAddressComponent, {
-      width: '800px',
+      width: '600px',
+        data: {client: this.data.client, id : this.data.id, razaoSocial: this.data.razaoSocial, name : this.data.name}
     });
     dialogoRef.afterClosed().subscribe((result : any) => {
       this.getClient();
     })
   }
+  openDeleteAddress(id: any){
+    window.localStorage.setItem('idAddressEdit', id);
+    const dialogoRef = this.dialog.open(ModalDeleteAddressComponent, {
+      width: '400px',
+    });
+    dialogoRef.afterClosed().subscribe((result : any) => {
+      this.getClient();
+    })
+  }
+    openAddAddress(){
+      const dialogoRef = this.dialog.open(ModalAddAddressComponent, {
+        width: '600px',
+        data: {client: this.data.client, id : this.data.id, razaoSocial: this.data.razaoSocial, name : this.data.name}
+      });
+      dialogoRef.afterClosed().subscribe((result : any) => {
+        this.getClient();
+      })
+  }
+
     
   
   async deleteAddress(id : any) {
