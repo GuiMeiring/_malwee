@@ -24,7 +24,7 @@
     <hr>
     <h2>Endereço *opicional</h2>
 
-    <mat-form-field class="example-20-width" appearance="fill">
+    <mat-form-field class="example-20-width" appearance="fill" (blur)="consultaCep()">
       <mat-label>CEP</mat-label>
       <input matInput  [(ngModel)]="cep" maxlength="8" minlength="8">
     </mat-form-field>

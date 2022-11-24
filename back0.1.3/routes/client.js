@@ -151,3 +151,38 @@ knl.patch('ClientsEndereco/:id', async(req,resp)=>{
     resp.json(result);
     resp.end();
 })
+knl.post('client/:id', async(req, resp) =>{
+    const schema =Joi.object({
+        address : Joi.array().items(Joi.object({
+            rua : Joi.string().min(3).max(100),
+            bairro : Joi.string().min(2).max(30),
+            cidade : Joi.string().min(3).max(60),
+            estado : Joi.string().min(3).max(20),
+            cep : Joi.string().min(8).max(8),
+            numero: Joi.number().min(1),
+            complemento: Joi.string().min(3).max(100),
+            pontoDeReferencia: Joi.string().min(3).max(100),
+
+        }))
+        
+    })
+    knl.validate(req.body, schema);
+    for (const address of req.body.address){
+        const result2 = knl.sequelize().models.Endereco.build({
+            rua : address.rua,
+            bairro : address.bairro,
+            cidade : address.cidade,
+            estado : address.estado,
+            cep : address.cep,
+            numero: address.numero,
+            complemento:address.complemento,
+            pontoDeReferencia: address.pontoDeReferencia,
+            fkClients : req.params.id,
+            status:1
+        })
+
+        await result2.save();        
+    }
+
+    resp.end();
+});

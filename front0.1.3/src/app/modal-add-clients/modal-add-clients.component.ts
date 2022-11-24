@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HttpService } from 'src/services/HttpService';
+import { CepServiceService } from '../cep-service.service';
 
 
 @Component({
@@ -27,13 +28,26 @@ cidade: string ='';
 estado: string ='';
 
 
-  constructor(public dialogRef: MatDialogRef<ModalAddClientsComponent>, private httpService : HttpService) { }
+  constructor(public dialogRef: MatDialogRef<ModalAddClientsComponent>,private CepService : CepServiceService, private httpService : HttpService) { }
 
   ngOnInit(): void {
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
+  consultaCep(){
+    console.log("foi")
+    this.CepService.get(String(this.cep)).subscribe((dados: any) => this.populaForm(dados));
+  }
+
+  populaForm(dados : any){
+   this.cep = dados.cep,
+   this.numero = dados.logradouro,
+   this.bairro = dados.bairro,
+   this.cidade = dados.localidade,
+   this.estado = dados.uf
+  }
+ 
   async clientAdd() {
     this.client= await this.httpService.post('client', { name: this.name, cnpj: this.cnpj, razaoSocial: this.razaoSocial, dateClient: this.startDate, adddress:this.enderecos});
     this.onNoClick();

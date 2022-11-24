@@ -63,8 +63,10 @@ export class ModalAddAddressComponent implements OnInit {
     console.log(this.data.name);
     console.log(this.data.razaoSocial);
     console.log(this.data.id);
+    console.log(this.address);
     
-    this.client= await this.httpService.post(`client/${this.data.id}`,{name:this.data.name,razaoSocial: this.data.razaoSocial, address: this.address});
+    this.client= await this.httpService.post(`client/${this.data.id}`,{address: this.address});
+    this.onNoClick();
   
   }
   
