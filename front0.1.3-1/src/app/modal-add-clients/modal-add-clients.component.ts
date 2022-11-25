@@ -42,7 +42,7 @@ estado: string ='';
 
   populaForm(dados : any){
    this.cep = dados.cep,
-   this.numero = dados.logradouro,
+   this.rua = dados.logradouro,
    this.bairro = dados.bairro,
    this.cidade = dados.localidade,
    this.estado = dados.uf

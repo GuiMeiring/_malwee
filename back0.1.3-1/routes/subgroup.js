@@ -70,6 +70,16 @@ knl.get('subgroup/:id', async(req, resp) => {
     resp.json(result);
     resp.end();
 })
+knl.get('subgroups', async(req, resp) => {
+    let result = await knl.sequelize().models.Subgroup.findAll({
+        where : {
+            status : 1
+        }
+    });
+    
+    resp.json(result);
+    resp.end();
+})
 knl.put('subgroup', async(req, resp) => {
     const result = await knl.sequelize().models.Subgroup.update({
         description:req.body.description,

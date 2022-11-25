@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpService } from 'src/services/HttpService';
+import { CepServiceService } from '../cep-service.service';
 import { DialogDataClient } from '../modal-edit-address/modal-edit-address.component';
 
 @Component({
@@ -27,9 +28,21 @@ export class ModalAddAddressComponent implements OnInit {
   startDate : Date = new Date(2022, 0, 1);
 
   constructor(public dialogRef: MatDialogRef<ModalAddAddressComponent>, private httpService : HttpService,
-    @Inject(MAT_DIALOG_DATA) private data : DialogDataClient) { }
+    @Inject(MAT_DIALOG_DATA) private data : DialogDataClient,private CepService : CepServiceService) { }
 
   ngOnInit(): void {
+  }
+  consultaCep(){
+    
+    this.CepService.get(String(this.cep)).subscribe((dados: any) => this.populaForm(dados));
+  }
+
+  populaForm(dados : any){
+   this.cep = dados.cep,
+   this.rua = dados.logradouro,
+   this.bairro = dados.bairro,
+   this.cidade = dados.localidade,
+   this.estado = dados.uf
   }
   onNoClick(): void {
     this.dialogRef.close();

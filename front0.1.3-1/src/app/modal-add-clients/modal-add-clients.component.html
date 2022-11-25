@@ -24,13 +24,9 @@
     <hr>
     <h2>Endereço *opicional</h2>
 
-    <mat-form-field class="example-20-width" appearance="fill" (blur)="consultaCep()">
+    <mat-form-field class="example-20-width" appearance="fill" >
       <mat-label>CEP</mat-label>
-      <input matInput  [(ngModel)]="cep" maxlength="8" minlength="8">
-    </mat-form-field>
-    <mat-form-field class="example-20-width" appearance="fill">
-      <mat-label>Número da casa</mat-label>
-      <input matInput  type="number" [(ngModel)]="numero">
+      <input matInput  [(ngModel)]="cep" maxlength="9" minlength="9" (blur)="consultaCep()">
     </mat-form-field>
     <mat-form-field class="example-20-width" appearance="fill">
       <mat-label>Rua</mat-label>
@@ -47,6 +43,10 @@
     <mat-form-field class="example-20-width" appearance="fill">
       <mat-label>Estado</mat-label>
       <input matInput [(ngModel)]="estado" maxlength="100" minlength="1">
+    </mat-form-field>
+    <mat-form-field class="example-20-width" appearance="fill">
+      <mat-label>Número da casa</mat-label>
+      <input matInput  type="number" [(ngModel)]="numero">
     </mat-form-field>
     <mat-form-field class="example-20-width" appearance="fill">
       <mat-label>Ponto de Referência</mat-label>

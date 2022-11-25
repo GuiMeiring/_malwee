@@ -22,7 +22,7 @@ export class ModalDeleteUserComponent implements OnInit {
     this.id= window.localStorage.getItem('id');
     console.log(this.id);
     this.user= await this.httpService.patch('user',{id: this.id});
-    this.dialogRef.close();
+    document.location.reload();
   }
 
 }

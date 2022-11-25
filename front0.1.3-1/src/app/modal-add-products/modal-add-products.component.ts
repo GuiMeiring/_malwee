@@ -10,7 +10,7 @@ import { HttpService } from 'src/services/HttpService';
 export class ModalAddProductsComponent implements OnInit {
   products: Array <any>=[];
   public group : Array <any>=[];
-  public subgroup: Array <any>=[];
+  subgroup: Array <any>=[];
   public collection : Array <any>=[];
   description: string | undefined;
   salePrice: number | undefined;
@@ -21,10 +21,10 @@ export class ModalAddProductsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ModalAddProductsComponent>, private httpService : HttpService) { }
 
-  ngOnInit(): void {
-    this.getGroup();
-    this.getSubgroup();
-    this.getCollection();
+  async ngOnInit() {
+    await this.getGroup();
+    await this.getSubgroup();
+    await this.getCollection();
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -38,6 +38,7 @@ export class ModalAddProductsComponent implements OnInit {
   }
   public async getSubgroup(){
     this.subgroup= await this.httpService.get('subgroup');
+    console.log(this.subgroup);
 
   }
   public async getCollection(){
@@ -46,7 +47,7 @@ export class ModalAddProductsComponent implements OnInit {
   }
   async addProducts(){
     this.products= await this.httpService.post('products/',{description: this.description, fkGroup: this.selectedGroup, fkSubGroup: this.selectedSubgroup, fkCollection: this.selectedCollection, salePrice: this.salePrice});
-
+    this.onNoClick();
   }
 
 }
