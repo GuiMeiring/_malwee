@@ -38,6 +38,7 @@ import { ModalDeleteUserComponent } from './modal-delete-user/modal-delete-user.
 import { ModalEditAddressComponent } from './modal-edit-address/modal-edit-address.component';
 import { ModalDeleteAddressComponent } from './modal-delete-address/modal-delete-address.component';
 import { ModalAddAddressComponent } from './modal-add-address/modal-add-address.component';
+import { RequestsComponent } from './requests/requests.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { ModalAddAddressComponent } from './modal-add-address/modal-add-address.
     ModalDeleteUserComponent,
     ModalEditAddressComponent,
     ModalDeleteAddressComponent,
-    ModalAddAddressComponent
+    ModalAddAddressComponent,
+    RequestsComponent
   ],
   imports: [
     RoutesModule,
