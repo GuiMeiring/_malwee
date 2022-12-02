@@ -45,7 +45,8 @@ knl.post('requests', async(req, resp) =>{
         DateEmission: req.body.DateEmission,
         DateDelivery:req.body.DateDelivery, 
         total:req.body.total,
-        fkAddress:req.body.fkAddress
+        fkAddress:req.body.fkAddress,
+        status: 1
     });
     await requests.save();
 
@@ -58,7 +59,8 @@ knl.post('requests', async(req, resp) =>{
             unitPrice : prodRequests.unitPrice,
             discount : prodRequests.discount,
             increase: prodRequests.increase,
-            total:prodRequests.total
+            total:prodRequests.total,
+            status: 1
         })
 
         await result2.save();        
@@ -66,3 +68,46 @@ knl.post('requests', async(req, resp) =>{
 
     resp.end();
 }, securityConsts.USER_TYPE_PUBLIC);
+knl.get('requests', async (req, resp)=>{
+    let result =await knl.sequelize().models.Requests.findAll({
+        where: {
+            status:1
+        }
+    });
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let requests of result){
+            const client = await knl.sequelize().models.Clients.findAll({
+                where : {
+                    id : requests.fkClients
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(client)){
+                requests.client_name = client[0].name
+            }
+
+            console.log(requests.client_name)
+        }
+    }
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let requests of result){
+            const address = await knl.sequelize().models.Endereco.findAll({
+                where : {
+                    id : requests.fkAddress
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(address)){
+                requests.address_rua = address[0].rua
+            }
+
+            console.log(requests.address_rua)
+        }
+    }
+    resp.json(result);
+    resp.end();
+})

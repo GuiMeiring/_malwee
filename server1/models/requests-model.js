@@ -8,6 +8,10 @@ module.exports = (sequelize) => {
             autoIncrement : true,
             allowNull : false
         },
+        status:{
+            type : Sequelize.INTEGER,
+            allowNull : true
+        },
         fkClients:{
             type : Sequelize.INTEGER(),
             allowNull : false

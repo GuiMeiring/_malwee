@@ -1,4 +1,9 @@
 <mat-card-content>
+  <div class="example-20-width" appearance="fill" *ngFor="let request of requests; let islast = last; let i = index">
+    <ng-template [ngIf]="islast">
+        <h1>{{i+1}}</h1>
+    </ng-template>
+  </div>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Cliente</mat-label>
     <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="nameClient" maxlength="100" minlength="2">
@@ -38,22 +43,25 @@
       <td (click)="addAddress(address.rua, address.id)">{{address.estado}}</td>
       <td (click)="addAddress(address.rua, address.id)">{{address.numero}}</td>
   </tr>
- </table>
- <br>
-        <mat-form-field class="example-30-width" appearance="fill">
-          <mat-label>Data de Emissão</mat-label>
-          <input matInput placeholder="{{startDate}}" [matDatepicker]="picker">
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="example-30-width" appearance="fill">
+</table>
+<mat-form-field class="example-40-width" appearance="fill">
+  <mat-label>Data de Emissão</mat-label>
+  <input matInput [matDatepicker]="picker"[(ngModel)]="startDate" >
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+</mat-form-field>
+  <mat-form-field class="example-40-width" appearance="fill">
           <mat-label>Data de Entrega</mat-label>
-          <input matInput [matDatepicker]="picker2">
+          <input matInput [matDatepicker]="picker2"[(ngModel)]="DateDelivery" >
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2 startView="year" [startAt]="DateDelivery"></mat-datepicker>
         </mat-form-field>
-    </mat-card-content>
+</mat-card-content>
+<mat-card-actions>
+  <button mat-raised-button color="primary" (click)="postProductsModal()">Adicionar produtos</button>
+  <button  mat-raised-button color="primary" (click)="onNoClick()" >Cancelar</button>
+</mat-card-actions>
 
 

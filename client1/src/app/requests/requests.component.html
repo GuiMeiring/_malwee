@@ -19,11 +19,11 @@
     </tr>
     <tr  *ngFor="let requests of requests  | filter : search">
         <td>{{requests.id}}</td>
-        <td>{{requests.fkClients}}</td>
-        <td>{{requests.dateEmisson}}</td>
+        <td>{{requests.client_name}}</td>
+        <td>{{requests.DateEmission}}</td>
         <td>{{requests.DateDelivery}}</td>
         <td>{{requests.total}}</td>
-        <td>{{requests.fkAddress}}</td>
+        <td>{{requests.address_rua}}</td>
         <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
     </tr>
 

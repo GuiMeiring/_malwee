@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/services/HttpService';
 import { ModalAddRequestsComponent } from '../modal-add-requests/modal-add-requests.component';
+
+export interface DialogDataRequests {
+  requests: Array<any>;
+}
 
 @Component({
   selector: 'app-requests',
@@ -23,7 +27,8 @@ requests: Array<any>=[];
   }
   public postRequests() {
     const ref = this.dialog.open(ModalAddRequestsComponent, {
-      width: '600px'
+      width: '600px',
+      data: {requests: this.requests}
     });
     ref.afterClosed().subscribe((result: any) => {
       this.listRequests();
