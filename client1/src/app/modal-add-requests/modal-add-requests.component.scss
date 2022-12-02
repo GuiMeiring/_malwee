@@ -6,43 +6,34 @@ mat-card-content{
     max-width: 1000px;
     width: 100%;
   }
-  
+
   .example-full-width {
     width: 100%;
   }
   table {
     border-collapse: collapse;
     width: 100%;
-  }
-  
-  th, td {
+}
+th {
+  padding: 8px;
+  text-align: center;
+  color:rgba(47,117,229,255);
+  border-bottom: 3px solid rgba(47,117,229,255)
+
+}
+
+td {
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-  
-  }
-  th:hover{
-    color:rgba(47,117,229,255);
-  border-bottom: 3px solid rgba(47,117,229,255)
-  
-  }
-  td:hover{
-  color:rgba(89,177,126,255);
-  border-bottom: 3px solid rgba(89,177,126,255);
-  }
-  .example-25-width {
-    width: 25%;
-    margin-right: 8px;
-  }
-  .example-30-width {
-    width: 30%;
-    margin-left: 10px;
-    margin-right: 8px;
-  }
-  .example-20-width {
-    width: 20%;
-    margin-left: 10px;
-  }
-  .mat-stepper-horizontal {
-    margin-top: 8px;
-  }
+
+}
+th:hover{
+    color:rgba(144,108,255,255);
+  border-bottom: 3px solid rgba(144,108,255,255);
+
+}
+td:hover{
+color:rgba(89,177,126,255);
+border-bottom: 3px solid rgba(89,177,126,255);
+}

@@ -1,33 +1,59 @@
 <mat-card-content>
-    <mat-form-field class="example-20-width" appearance="fill">
-        <h1>num</h1>
-    </mat-form-field>
-    <mat-form-field class="example-30-width" appearance="fill">
-        <input matInput placeholder="Inserir Cliente" [(ngModel)]="search">
-    </mat-form-field>
-</mat-card-content>
-    <mat-card-content *ngIf="search.length >=1">
-        <table>
-            <tr>
-              <th>Nome</th>
-              <th>CNPJ</th>
-            </tr>
-            <tr *ngFor="let clients of client | filter : search">
-                <td>{{clients.name}}</td>
-                <td>{{clients.cnpj}}</td>
-            </tr>
-        </table>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Cliente</mat-label>
+    <input matInput placeholder="Digite o nome do cliente"  type="text" [(ngModel)]="nameClient" maxlength="100" minlength="2">
+  </mat-form-field>
+   <!-------------------------------------------------------------------------------------------------->
+<br>
+<table *ngIf="nameClient.length >=1">
+  <tr>
+    <th>Nome</th>
+    <th>CNPJ</th>
+  </tr>
+  <tr  *ngFor="let clients of client | filter : nameClient">
+      <td (click)="addNameClient(clients.name,clients.id)">{{clients.name}}</td>
+      <td (click)="addNameClient(clients.name, clients.id)">{{clients.cnpj}}</td>
+      <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
+  </tr>
+ </table>
+  <br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Endereço</mat-label>
+    <input matInput placeholder="Digite a rua do Endereço"  type="text" [(ngModel)]="rua" maxlength="100" minlength="2">
+  </mat-form-field>
+   <!-------------------------------------------------------------------------------------------------->
+<br>
+<table *ngIf="nameClient.length >=1">
+  <tr>
+    <th>rua</th>
+    <th>Bairro</th>
+    <th>Cidade</th>
+    <th>Estado</th>
+    <th>Número</th>
+  </tr>
+  <tr  *ngFor="let address of address | filter : rua">
+      <td (click)="addAddress(address.rua, address.id)">{{address.rua}}</td>
+      <td (click)="addAddress(address.rua, address.id)">{{address.bairro}}</td>
+      <td (click)="addAddress(address.rua, address.id)">{{address.cidade}}</td>
+      <td (click)="addAddress(address.rua, address.id)">{{address.estado}}</td>
+      <td (click)="addAddress(address.rua, address.id)">{{address.numero}}</td>
+  </tr>
+ </table>
+ <br>
+        <mat-form-field class="example-30-width" appearance="fill">
+          <mat-label>Data de Emissão</mat-label>
+          <input matInput placeholder="{{startDate}}" [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-30-width" appearance="fill">
+          <mat-label>Data de Entrega</mat-label>
+          <input matInput [matDatepicker]="picker2">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 startView="year" [startAt]="DateDelivery"></mat-datepicker>
+        </mat-form-field>
     </mat-card-content>
-    <mat-card-content class="example-30-width" appearance="fill">
-        <mat-label>Data de emissão</mat-label>
-        <h1>Data de emissao{{startDate}}</h1>
-      </mat-card-content>
-      <br>
-      <mat-form-field class="example-30-width" appearance="fill">
-        <mat-label>Data de Entrega</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker startView="year" [startAt]="DateDelivery"></mat-datepicker>
-      </mat-form-field>
+
 
