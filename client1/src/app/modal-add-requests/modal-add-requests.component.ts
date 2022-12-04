@@ -14,6 +14,7 @@ export interface DialogDataRequests {
   styleUrls: ['./modal-add-requests.component.scss']
 })
 export class ModalAddRequestsComponent implements OnInit {
+  dataAtual=new Date();
   requests: Array<any>=[];
   search: string ='';
   client : Array<any>= [];
@@ -32,21 +33,17 @@ export class ModalAddRequestsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data : DialogDataRequests,public dialog : MatDialog) { }
 
    async ngOnInit() {
-    await this.get();
     this.requests.push(this.data.requests);
-    console.log(this.requests);
-    this.listaClients();
     let dia =String(this.startDate.getDate()).padStart(2,'0');
-    console.log(dia);
     let mes =String(this.startDate.getMonth()+1).padStart(2,'0');
-    console.log(mes);
     let ano =this.startDate.getFullYear();
-    console.log(ano);
-    this.startdate = (`${mes}/${dia}/${ano}`);
     this.dia = parseInt(dia)+7;
-    console.log(dia)
-    this.DateDelivery= new Date(`${ano}/${this.dia}/${mes}`);
+    this.DateDelivery= new Date(`${ano}/${mes}/${this.dia}`);
     
+    await this.get();
+    
+    await this.listaClients();
+
   }
   async listaClients(){
     this.client= await this.httpService.get('client');
