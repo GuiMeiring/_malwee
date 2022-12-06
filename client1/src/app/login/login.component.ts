@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.router.navigateByUrl('');
+    
     this.httpclient.post('http://localhost:3007/logon', {username : this.username, password : this.password}).toPromise().then((response : any)=> {
       console.log(response.token);
       if(response.token != null){

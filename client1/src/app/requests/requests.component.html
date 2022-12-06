@@ -20,8 +20,8 @@
     <tr  *ngFor="let requests of requests  | filter : search">
         <td>{{requests.id}}</td>
         <td>{{requests.client_name}}</td>
-        <td>{{requests.DateEmission}}</td>
-        <td>{{requests.DateDelivery}}</td>
+        <td>{{requests.DateEmission | date : 'MM/dd/yyyy'}}</td>
+        <td>{{requests.DateDelivery | date : 'MM/dd/yyyy'}}</td>
         <td>{{requests.total}}</td>
         <td>{{requests.address_rua}}</td>
         <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->

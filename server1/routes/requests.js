@@ -14,7 +14,6 @@ knl.post('requests', async(req, resp) =>{
         total:
         Joi.number().min(1).max(9999999999).required(),
         prodRequests : Joi.array().items(Joi.object({
-            fkRequests:Joi.number().min(1).required(),
             fkProducts:Joi.number().min(1).required(),
             amount:Joi.number().min(1).max(999999).required(),
             unitPrice:Joi.number().min(1).max(9999999999).required(),
@@ -53,7 +52,7 @@ knl.post('requests', async(req, resp) =>{
     console.log(requests.id);
     for (const prodRequests of req.body.prodRequests){
         const result2 = knl.sequelize().models.ProdRequests.build({
-            fkRequests : prodRequests.fkRequests,
+            fkRequests : requests.id,
             fkProducts : prodRequests.fkProducts,
             amount : prodRequests.amount,
             unitPrice : prodRequests.unitPrice,
