@@ -35,6 +35,7 @@ export class ModalAddRequestsComponent implements OnInit {
   unitPrice: number | undefined;
 discount: any;
 increase: any;
+totalProduct: any;
 total: any;
 
 
@@ -99,7 +100,7 @@ total: any;
   
     }
     async addEndereco(){
-      this.product.push({"fkProducts": this.selectedProduct, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.total})
+      this.product.push({"fkProducts": this.selectedProduct, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct})
       console.log(this.product);
     }
     async addRequests() {
