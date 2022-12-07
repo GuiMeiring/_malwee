@@ -62,7 +62,7 @@
         </mat-form-field>
         <mat-form-field class="example-40-width " appearance="fill">
           <mat-label>Total</mat-label>
-          <input matInput type="number"[(ngModel)]="totalProduct">
+          <input matInput type="number"[(ngModel)]="total">
       </mat-form-field>
 </mat-card-content>
 </mat-tab>
@@ -71,29 +71,44 @@
 
 
 <mat-tab label="Adicionar Produto">
+
   <mat-card-content>
-    <app-dropdown [array]="products" [idField]="'id'" [textField]="'description'" [title]="'Produtos'" [(ngModel)]="selectedProduct"></app-dropdown> 
-    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Endereço</mat-label>
+      <input matInput placeholder="Digite o produto"  type="text" [(ngModel)]="description" maxlength="100" minlength="2">
+    </mat-form-field>
+     <!-------------------------------------------------------------------------------------------------->
+  <br>
+  <table *ngIf="description.length >=1">
+    <tr>
+      <th>Descrição</th>
+    </tr>
+    <tr  *ngFor="let product of products | filter : description">
+        <td (click)="addProduct(product.description, product.id, product.salePrice, product.total)">{{product.description}}</td>
+    </tr>
+  </table>
+  <div *ngFor="let product of product">
     <mat-form-field class="example-30-width ">
         <mat-label>Quantidade</mat-label>
-        <input matInput type="number"[(ngModel)]="amount" min="1" max="100" required>
+        <input matInput type="number"[(ngModel)]="amount" (blur)="insertTotalQtd()" min="1" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
-        <mat-label>Preço unitário</mat-label>
-        <input matInput [(ngModel)]="unitPrice">
+      <mat-label>Preço unitário</mat-label>
+        <input matInput  [(ngModel)]="unitPrice">
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Desconto</mat-label>
-        <input matInput [(ngModel)]="discount" minlength="4" maxlength="1000000000000" required>
+        <input matInput [(ngModel)]="discount" (blur)="insertTotalDesc()" minlength="1" maxlength="4" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
-        <mat-label>Acrecento</mat-label>
-        <input matInput [(ngModel)]="increase" minlength="4" maxlength="1000000000000" required>
+        <mat-label>Acrescimo</mat-label>
+        <input matInput [(ngModel)]="increase" (blur)="insertTotalAcres()" minlength="1" maxlength="4" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Total</mat-label>
-        <input matInput [(ngModel)]="total" minlength="4" maxlength="1000000000000" required>
+        <input matInput [(ngModel)]="totalProduct" minlength="4" maxlength="1000000000000" required>
     </mat-form-field>
+  </div>
 </mat-card-content>
 <mat-card-actions>
     <button mat-raised-button color="primary" (click)="addEndereco()">Adicionar produtos</button>

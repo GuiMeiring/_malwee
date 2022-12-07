@@ -31,12 +31,13 @@ export class ModalAddRequestsComponent implements OnInit {
   fkAddress: number | undefined;
   rua: string='';
   selectedProduct: number | undefined;
-  amount: any;
+  amount: number=1;
   unitPrice: number | undefined;
 discount: any;
 increase: any;
-totalProduct: any;
+totalProduct: number =0;
 total: any;
+description: string='';
 
 
   constructor(public dialogRef: MatDialogRef<ModalAddRequestsComponent>, private httpService : HttpService,
@@ -62,6 +63,17 @@ total: any;
 
 
   }
+  
+  async addProduct(description:string, id: number, salePrice: number, total: number) {
+    console.log(id)
+    this.selectedProduct=id;
+    this.description= description;
+    this.totalProduct=salePrice;
+    
+    this.unitPrice= salePrice;
+    this.product= await this.httpService.get(`products/${id}`);
+      console.log(this.product);
+    }
   async get(){
     this.requests = await this.httpService.get('requests')
   }
@@ -100,12 +112,27 @@ total: any;
   
     }
     async addEndereco(){
+      
+      this.description='';
       this.product.push({"fkProducts": this.selectedProduct, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct})
       console.log(this.product);
     }
     async addRequests() {
       this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.fkAddress, total: this.total,prodRequests: this.product} );
       this.onNoClick();
+      }
+      public insertTotalQtd(){
+        console.log(this.amount);
+        this.totalProduct=this.totalProduct * this.amount;
+        console.log(this.totalProduct);
+      }
+      public insertTotalDesc(){
+        this.totalProduct=this.totalProduct-((this.totalProduct *this.discount)/100);
+        console.log(this.totalProduct);
+      }
+      public insertTotalAcres(){
+        this.totalProduct=this.totalProduct+((this.totalProduct *this.increase)/100).valueOf();
+        console.log(this.totalProduct);
       }
 
 }

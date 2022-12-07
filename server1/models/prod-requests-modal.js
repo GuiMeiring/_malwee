@@ -25,15 +25,15 @@ module.exports = (sequelize) => {
             allowNull:false
         },
         unitPrice:{
-            type: Sequelize.DECIMAL(10,2),
+            type: Sequelize.INTEGER,
             allowNull:false
         },
         discount:{
-            type: Sequelize.DECIMAL(10,2),
+            type: Sequelize.INTEGER,
             allowNull:false
         },
         increase:{
-            type: Sequelize.DECIMAL(10,2),
+            type: Sequelize.INTEGER,
             allowNull:false
         },
         total:{
