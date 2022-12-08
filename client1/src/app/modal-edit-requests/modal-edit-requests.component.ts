@@ -14,15 +14,30 @@ export interface DialogDataRequests {
 export class ModalEditRequestsComponent implements OnInit {
   requests: Array<any>=[];
   products: Array<any>=[];
+  address: Array<any>=[];
+  selectedAddress: number | undefined;
+  startDate: Date= new Date();
+  DateDelivery: Date= new Date();
 
   constructor(public dialogRef: MatDialogRef<ModalEditRequestsComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : DialogDataRequests) { }
 
   async ngOnInit(){
     this.requests.push(this.data.requests);
+    await this.listaProducts();
+    await this.listaAddress();
+    
+    
+
+  }
+  async listaProducts(){
     this.products=  await this.httpService.get(`requests/${this.data.id}`);
     console.log(this.products);
-
+  }
+  async listaAddress(){
+    console.log(this.data.id)
+    this.address=  await this.httpService.get(`client/${this.data.id}`);
+    console.log(this.address);
   }
 
 }

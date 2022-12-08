@@ -36,16 +36,21 @@ export class ModalAddRequestsComponent implements OnInit {
   unitPrice: number | undefined;
 discount: number =0;
 increase: number =0;
-totalProduct: number =0;
-total: number | undefined;
+totalProduct: any;
+total: number =0;
 description: string='';
 denovo : number=0;
+totalString: string='';
 
 
   constructor(public dialogRef: MatDialogRef<ModalAddRequestsComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : DialogDataRequests,public dialog : MatDialog) { }
 
    async ngOnInit() {
+    let teste=34.987;
+        let teste1=''
+        teste1=teste.toFixed(2);
+        console.log(teste1)
     await this.listarProducts();
     this.requests.push(this.data.requests);
     let dia =String(this.startDate.getDate()).padStart(2,'0');
@@ -130,7 +135,9 @@ denovo : number=0;
       public insertTotalQtd(){
         console.log(this.amount);
         this.totalProduct=this.totalProduct * this.amount;
-        console.log(this.totalProduct);
+
+        this.totalString= this.totalProduct.toFixed(2);
+        console.log(this.totalString)
       }
       public insertTotalDesc(){
         this.totalProduct=this.totalProduct-((this.totalProduct *this.discount)/100);
@@ -138,7 +145,8 @@ denovo : number=0;
       }
       public insertTotalAcres(){
         this.totalProduct=this.totalProduct+((this.totalProduct *this.increase)/100);
-        console.log(this.totalProduct);
+        this.totalProduct= this.totalProduct.toFixed(2);
+        
       }
 
 }

@@ -112,11 +112,28 @@ knl.get('requests', async (req, resp)=>{
 })
 knl.get('requests/:id', async (req, resp)=>{
     
-    const result =await knl.sequelize().models.ProdRequests.findAll({
+    let result =await knl.sequelize().models.ProdRequests.findAll({
         where: {
             fkRequests: req.params.id,
             status:1
         }
     });
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let requests of result){
+            const product = await knl.sequelize().models.Products.findAll({
+                where : {
+                    id : requests.fkProducts
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(product)){
+                requests.product_description = product[0].description
+            }
+
+            console.log(requests.product_description)
+        }
+    }
     resp.send(result);
 })
