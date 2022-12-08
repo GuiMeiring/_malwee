@@ -110,3 +110,13 @@ knl.get('requests', async (req, resp)=>{
     resp.json(result);
     resp.end();
 })
+knl.get('requests/:id', async (req, resp)=>{
+    
+    const result =await knl.sequelize().models.ProdRequests.findAll({
+        where: {
+            fkRequests: req.params.id,
+            status:1
+        }
+    });
+    resp.send(result);
+})

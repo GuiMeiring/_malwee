@@ -12,11 +12,17 @@ export interface DialogDataRequests {
   styleUrls: ['./modal-edit-requests.component.scss']
 })
 export class ModalEditRequestsComponent implements OnInit {
+  requests: Array<any>=[];
+  products: Array<any>=[];
 
   constructor(public dialogRef: MatDialogRef<ModalEditRequestsComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : DialogDataRequests) { }
 
-  ngOnInit(): void {
+  async ngOnInit(){
+    this.requests.push(this.data.requests);
+    this.products=  await this.httpService.get(`requests/${this.data.id}`);
+    console.log(this.products);
+
   }
 
 }

@@ -1,1 +1,46 @@
-<p>modal-edit-requests works!</p>
+<mat-tab-group>
+    <mat-tab label="Dados">
+        <mat-card-content>
+            <br>
+            <table>
+                <tr>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Valor unitário</th>
+                  <th>Desconto</th>
+                  <th>Acrescemo</th>
+                  <th>Total</th>
+                </tr>
+                <tr  *ngFor="let product of products">
+                    <td>{{product.fkProducts}}</td>
+                    <td>{{product.amount}}</td>
+                    <td>{{product.unitPrice}}</td>
+                    <td>{{product.discount}}</td>
+                    <td>{{product.increase}}</td>
+                    <td>{{product.total}}</td>
+                </tr>
+              </table>
+            <h2>Lista de Produtos</h2>
+            <br>
+            <table>
+                <tr>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Valor unitário</th>
+                  <th>Desconto</th>
+                  <th>Acrescemo</th>
+                  <th>Total</th>
+                </tr>
+                <tr  *ngFor="let product of products">
+                    <td>{{product.fkProducts}}</td>
+                    <td>{{product.amount}}</td>
+                    <td>{{product.unitPrice}}</td>
+                    <td>{{product.discount}}</td>
+                    <td>{{product.increase}}</td>
+                    <td>{{product.total}}</td>
+                </tr>
+              </table>
+
+        </mat-card-content>
+    </mat-tab>
+</mat-tab-group>

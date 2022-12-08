@@ -137,7 +137,7 @@ denovo : number=0;
         console.log(this.totalProduct);
       }
       public insertTotalAcres(){
-        this.totalProduct=this.totalProduct+((this.totalProduct *this.increase)/100).valueOf();
+        this.totalProduct=this.totalProduct+((this.totalProduct *this.increase)/100);
         console.log(this.totalProduct);
       }
 
