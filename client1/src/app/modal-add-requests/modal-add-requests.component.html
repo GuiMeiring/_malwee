@@ -62,7 +62,7 @@
         </mat-form-field>
         <mat-form-field class="example-40-width " appearance="fill">
           <mat-label>Total</mat-label>
-          <input matInput type="number"[(ngModel)]="total">
+          <input matInput type="number" [(ngModel)]="total">
       </mat-form-field>
 </mat-card-content>
 </mat-tab>
@@ -84,10 +84,11 @@
       <th>Descrição</th>
     </tr>
     <tr  *ngFor="let product of products | filter : description">
-        <td (click)="addProduct(product.description, product.id, product.salePrice, product.total)">{{product.description}}</td>
+        <td (click)="addProduct(product.description, product.id, product.salePrice)">{{product.description}}</td>
     </tr>
   </table>
   <div *ngFor="let product of product">
+    <div *ngIf="denovo ==1">
     <mat-form-field class="example-30-width ">
         <mat-label>Quantidade</mat-label>
         <input matInput type="number"[(ngModel)]="amount" (blur)="insertTotalQtd()" min="1" max="100" required>
@@ -109,6 +110,7 @@
         <input matInput [(ngModel)]="totalProduct" minlength="4" maxlength="1000000000000" required>
     </mat-form-field>
   </div>
+</div>
 </mat-card-content>
 <mat-card-actions>
     <button mat-raised-button color="primary" (click)="addEndereco()">Adicionar produtos</button>
@@ -126,7 +128,7 @@
       <th>Acrescemo</th>
       <th>Total</th>
     </tr>
-    <tr  *ngFor="let products of product">
+    <tr  *ngFor="let products of listaProduct">
         <td>{{products.fkProducts}}</td>
         <td>{{products.amount}}</td>
         <td>{{products.unitPrice}}</td>

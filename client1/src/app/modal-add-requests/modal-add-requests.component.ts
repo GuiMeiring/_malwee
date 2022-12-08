@@ -16,6 +16,7 @@ export interface DialogDataRequests {
 })
 export class ModalAddRequestsComponent implements OnInit {
   dataAtual=new Date();
+  listaProduct: Array<any>=[];
   requests: Array<any>=[];
   products : Array<any>=[];
   product : Array<any>=[];
@@ -30,14 +31,15 @@ export class ModalAddRequestsComponent implements OnInit {
   address: Array<any>=[];
   fkAddress: number | undefined;
   rua: string='';
-  selectedProduct: number | undefined;
+  fkProducts: number =0;
   amount: number=1;
   unitPrice: number | undefined;
-discount: any;
-increase: any;
+discount: number =0;
+increase: number =0;
 totalProduct: number =0;
-total: any;
+total: number | undefined;
 description: string='';
+denovo : number=0;
 
 
   constructor(public dialogRef: MatDialogRef<ModalAddRequestsComponent>, private httpService : HttpService,
@@ -64,11 +66,12 @@ description: string='';
 
   }
   
-  async addProduct(description:string, id: number, salePrice: number, total: number) {
+  async addProduct(description:string, id: number, salePrice: number) {
     console.log(id)
-    this.selectedProduct=id;
+    this.fkProducts=id;
     this.description= description;
     this.totalProduct=salePrice;
+    this.denovo=1;
     
     this.unitPrice= salePrice;
     this.product= await this.httpService.get(`products/${id}`);
@@ -112,13 +115,16 @@ description: string='';
   
     }
     async addEndereco(){
-      
+     console.log(this.fkProducts) ;
       this.description='';
-      this.product.push({"fkProducts": this.selectedProduct, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct})
+      this.listaProduct.push({"fkProducts": this.fkProducts, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct})
       console.log(this.product);
+      this.total=+ this.totalProduct;
+      this.denovo=0;
     }
     async addRequests() {
-      this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.fkAddress, total: this.total,prodRequests: this.product} );
+      console.log(this.fkClients);
+      this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.fkAddress, total: this.total,prodRequests: this.listaProduct} );
       this.onNoClick();
       }
       public insertTotalQtd(){

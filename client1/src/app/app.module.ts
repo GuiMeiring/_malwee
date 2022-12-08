@@ -42,6 +42,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { AddrequestsComponent } from './addrequests/addrequests.component';
 import { ModalAddRequestsComponent } from './modal-add-requests/modal-add-requests.component';
 import { ModalProRequestsComponent } from './modal-pro-requests/modal-pro-requests.component';
+import { ModalEditRequestsComponent } from './modal-edit-requests/modal-edit-requests.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { ModalProRequestsComponent } from './modal-pro-requests/modal-pro-reques
     RequestsComponent,
     AddrequestsComponent,
     ModalAddRequestsComponent,
-    ModalProRequestsComponent
+    ModalProRequestsComponent,
+    ModalEditRequestsComponent
   ],
   imports: [
     RoutesModule,
