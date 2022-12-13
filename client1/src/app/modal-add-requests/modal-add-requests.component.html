@@ -23,29 +23,12 @@
       <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
   </tr>
  </table>
-  <br>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Endereço</mat-label>
-    <input matInput placeholder="Digite a rua do Endereço e clique no correspondente "  type="text" [(ngModel)]="rua" maxlength="100" minlength="2">
-  </mat-form-field>
    <!-------------------------------------------------------------------------------------------------->
 <br>
-<table *ngIf="nameClient.length >=1">
-  <tr>
-    <th>rua</th>
-    <th>Bairro</th>
-    <th>Cidade</th>
-    <th>Estado</th>
-    <th>Número</th>
-  </tr>
-  <tr  *ngFor="let address of address | filter : rua">
-      <td (click)="addAddress(address.rua, address.id)">{{address.rua}}</td>
-      <td (click)="addAddress(address.rua, address.id)">{{address.bairro}}</td>
-      <td (click)="addAddress(address.rua, address.id)">{{address.cidade}}</td>
-      <td (click)="addAddress(address.rua, address.id)">{{address.estado}}</td>
-      <td (click)="addAddress(address.rua, address.id)">{{address.numero}}</td>
-  </tr>
-</table>
+<div *ngIf="fkClients!=0">
+  <app-dropdown [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedteste"></app-dropdown> 
+</div>
+
 <mat-form-field class="example-40-width" appearance="fill">
   <mat-label>Data de Emissão</mat-label>
   <input matInput [matDatepicker]="picker"  [(ngModel)]="startDate"  [min]="startDate"  [max]="startDate" required>

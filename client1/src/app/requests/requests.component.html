@@ -18,12 +18,13 @@
       <th>Endereço</th>
     </tr>
     <tr  *ngFor="let requests of requests  | filter : search">
-        <td (click)="modalEditRequests(requests.id, requests)">{{requests.id}}</td>
-        <td (click)="modalEditRequests(requests.id, requests)">{{requests.client_name}}</td>
-        <td (click)="modalEditRequests(requests.id, requests)">{{requests.DateEmission | date : 'MM/dd/yyyy'}}</td>
-        <td (click)="modalEditRequests(requests.id, requests)">{{requests.DateDelivery | date : 'MM/dd/yyyy'}}</td>
-        <td (click)="modalEditRequests(requests.id, requests)">{{requests.total}}</td>
-        <td (click)="modalEditRequests(requests.id, requests)">{{requests.address_rua}}</td>
+        <td (click)="modalEditRequests(requests.id, requests, requests.fkClients, requests.DateEmission, requests.DateDelivery, requests.fkAddress, requests.total)">{{requests.id}}</td>
+        <td (click)="modalEditRequests(requests.id, requests, requests.fkClients, requests.DateEmission, requests.DateDelivery, requests.fkAddress, requests.total)">{{requests.client_name}}</td>
+        <td (click)="modalEditRequests(requests.id, requests, requests.fkClients, requests.DateEmission, requests.DateDelivery, requests.fkAddress, requests.total)">{{requests.DateEmission | date : 'MM/dd/yyyy'}}</td>
+        <td (click)="modalEditRequests(requests.id, requests, requests.fkClients, requests.DateEmission, requests.DateDelivery, requests.fkAddress, requests.total)">{{requests.DateDelivery | date : 'MM/dd/yyyy'}}</td>
+        <td (click)="modalEditRequests(requests.id, requests, requests.fkClients, requests.DateEmission, requests.DateDelivery, requests.fkAddress, requests.total)">{{requests.total}}</td>
+        <td (click)="modalEditRequests(requests.id, requests, requests.fkClients, requests.DateEmission, requests.DateDelivery, requests.fkAddress, requests.total)">{{requests.address_rua}}</td>
+        
         <!--<p><b>{{group.id}} - {{group.description}}</b></p>-->
     </tr>
 

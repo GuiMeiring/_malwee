@@ -10,6 +10,13 @@ import { ModalEditRequestsComponent } from '../modal-edit-requests/modal-edit-re
 export interface DialogDataRequests {
   requests: Array<any>;
   id: number;
+  fkClients:number;
+  DateEmisson: Date;
+  DateDelivery: Date;
+  fkAddress: number;
+  total: number;
+  prodRequests: Array<any>;
+  salePrice: number;
 }
 
 @Component({
@@ -37,10 +44,11 @@ requests: Array<any>=[];
       this.listRequests();
     })
   }
-  public modalEditRequests(id: number, requests: Array<any>){
+  public modalEditRequests(id: number, requests: Array<any>, fkClients: number, DateEmission: Date, DateDelivery: Date, fkAddress: number, total: number){
     const ref = this.dialog.open(ModalEditRequestsComponent,{
       width: '800px',
-      data:{id : id, requests: requests}
+      data:{id : id, requests: requests, fkClients: fkClients, DateEmission: DateEmission,DateDelivery: DateDelivery, fkAddress: fkAddress, total: total }
+      
     });
     ref.afterClosed().subscribe((result: any) =>{
       this.listRequests();

@@ -44,10 +44,8 @@
     </mat-tab>
     <mat-tab label="Editar">
         <mat-card-content>
-            <br>
-            <h2>Editar dados do pedido</h2>
         <br>
-        <app-dropdown [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereco'" [(ngModel)]="selectedAddress"></app-dropdown> 
+        <app-dropdown class="example-35-width" [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedAddress"></app-dropdown> 
         <br>
         <mat-form-field class="example-35-width" appearance="fill">
             <mat-label>Data de Emissão</mat-label>
@@ -65,10 +63,37 @@
                   </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-            <button  mat-raised-button color="primary"  >Editar</button>
+            <button  mat-raised-button color="primary">Editar</button>
         </mat-card-actions>
+        <hr>
         <mat-card-content>
-            <hr>
+          <br>
+          <table>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor unitário</th>
+                <th>Desconto</th>
+                <th>Acrescemo</th>
+                <th>Total</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+              </tr>
+              <tr  *ngFor="let product of products">
+                  <td>{{product.product_description}}</td>
+                  <td>{{product.amount}}</td>
+                  <td>{{product.unitPrice}}</td>
+                  <td>{{product.discount}}</td>
+                  <td>{{product.increase}}</td>
+                  <td>{{product.total}}</td>
+                  <td  (click)="openEditProduct(product.id, product.unitPrice, product.fkProducts, product.total, product.fkRequests)">
+                    <mat-icon>edit</mat-icon>
+                  </td>
+                  <td (click)="openDeleteProduct(product.id)"> 
+                    <mat-icon >delete</mat-icon>
+                  </td>
+              </tr>
+            </table>
         </mat-card-content>
     </mat-tab>
 </mat-tab-group>

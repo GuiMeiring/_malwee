@@ -7,6 +7,7 @@ import { ModalProRequestsComponent } from '../modal-pro-requests/modal-pro-reque
 export interface DialogDataRequests {
   products: Array<any>;
   requests: Array<any>;
+
 }
 
 @Component({
@@ -27,7 +28,7 @@ export class ModalAddRequestsComponent implements OnInit {
   startdate : any;
   dia: number | undefined;
   nameClient: string ='';
-  fkClients: number | undefined;
+  fkClients: number =0;
   address: Array<any>=[];
   fkAddress: number | undefined;
   rua: string='';
@@ -41,6 +42,7 @@ total: number =0;
 description: string='';
 denovo : number=0;
 totalString: string='';
+selectedteste: number=0;
 
 
   constructor(public dialogRef: MatDialogRef<ModalAddRequestsComponent>, private httpService : HttpService,
@@ -103,16 +105,6 @@ totalString: string='';
     onNoClick(): void {
       this.dialogRef.close();
     }
-    postProductsModal(): void {
-      const ref = this.dialog.open(ModalProRequestsComponent, {
-        width: '600px',
-        data: {products: this.products, requests: this.requests}
-      });
-      ref.afterClosed().subscribe(result => {
-        this.get();
-      })
-    }
-    
     async listarProducts(){
       this.products= await this.httpService.get('products');
       console.log(this.products);
@@ -129,7 +121,7 @@ totalString: string='';
     }
     async addRequests() {
       console.log(this.fkClients);
-      this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.fkAddress, total: this.total,prodRequests: this.listaProduct} );
+      this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedteste, total: this.total,prodRequests: this.listaProduct} );
       this.onNoClick();
       }
       public insertTotalQtd(){
