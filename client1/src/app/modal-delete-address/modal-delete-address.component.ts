@@ -7,6 +7,7 @@ import { HttpService } from 'src/services/HttpService';
   templateUrl: './modal-delete-address.component.html',
   styleUrls: ['./modal-delete-address.component.scss']
 })
+
 export class ModalDeleteAddressComponent implements OnInit {
   address: Array<any>=[];
 

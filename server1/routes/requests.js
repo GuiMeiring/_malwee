@@ -171,7 +171,27 @@ knl.put('requests', async(req,resp)=>{
 });
 knl.patch('ProdRequests/:id', async(req,resp)=>{
     console.log(req.params.id);
-    const result = await knl.sequelize().models.ProdRequests.update({
+    const result = await knl.sequelize().models.Requests.update({ 
+        total:req.body.total,
+    },{
+        where : {
+            id: req.body.fkRequests
+        }
+    });
+    const result2 = await knl.sequelize().models.ProdRequests.update({
+        status:0
+    },
+    {
+    where:{
+        id:req.params.id
+        }
+    });
+    resp.json(result);
+    resp.end();
+})
+knl.patch('requests/:id', async(req,resp)=>{
+    console.log(req.params.id);
+    const result = await knl.sequelize().models.Requests.update({
         status:0
     },
     {

@@ -50,10 +50,11 @@ export class ModalEditRequestsComponent implements OnInit {
         this.address= await this.httpService.get(`client/${this.data.id}`);
         console.log(this.address);
    }
-   openDeleteProduct(id: any){
+   openDeleteProduct(id: any, salePrice: number, fkProduct: number,totalProduct: number, fkRequests: number ){
     window.localStorage.setItem('idProductRequestsEdit', id);
     const dialogoRef = this.dialog.open(ModalDeleteProductRequestsComponent, {
       width: '400px',
+      data: {requests: this.data.requests, id: this.data.id, fkClients: this.data.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.data.total,prodRequests: this.products, salePrice : salePrice, fkProduct: fkProduct, totalProduct: totalProduct, fkRequests: fkRequests}
     });
     dialogoRef.afterClosed().subscribe((result : any) => {
       this.listaProducts();
@@ -71,5 +72,14 @@ export class ModalEditRequestsComponent implements OnInit {
         this.listaProducts();
       })
 
+    }
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+  
+    
+    async requestsDelete(){
+      this.requests= await this.httpService.patch(`requests/${this.data.id}`,{});
+      this.onNoClick();
     }
   }

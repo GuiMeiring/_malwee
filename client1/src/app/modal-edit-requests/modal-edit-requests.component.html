@@ -89,11 +89,22 @@
                   <td  (click)="openEditProduct(product.id, product.unitPrice, product.fkProducts, product.total, product.fkRequests)">
                     <mat-icon>edit</mat-icon>
                   </td>
-                  <td (click)="openDeleteProduct(product.id)"> 
+                  <td (click)="openDeleteProduct(product.id, product.unitPrice, product.fkProducts, product.total, product.fkRequests)"> 
                     <mat-icon >delete</mat-icon>
                   </td>
               </tr>
             </table>
         </mat-card-content>
+    </mat-tab>
+    <mat-tab label="Deletar" >
+      <mat-card-content>
+        <br>
+           <h1>Tem certeza que deseja excluir esse grupo? </h1>
+        <br>
+        <mat-card-actions>
+          <button  mat-raised-button color="primary"  (click)="requestsDelete()">Excluir</button>
+          <button  mat-raised-button color="primary"  (click)="onNoClick()">Cancelar</button>
+        </mat-card-actions>
+      </mat-card-content>
     </mat-tab>
 </mat-tab-group>
