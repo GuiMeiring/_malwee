@@ -45,6 +45,7 @@ requests: Array<any>=[];
     })
   }
   public modalEditRequests(id: number, requests: Array<any>, fkClients: number, DateEmission: Date, DateDelivery: Date, fkAddress: number, total: number){
+    console.log(fkClients);
     const ref = this.dialog.open(ModalEditRequestsComponent,{
       width: '800px',
       data:{id : id, requests: requests, fkClients: fkClients, DateEmission: DateEmission,DateDelivery: DateDelivery, fkAddress: fkAddress, total: total }

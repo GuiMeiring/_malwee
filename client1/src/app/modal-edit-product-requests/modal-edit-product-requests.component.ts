@@ -86,8 +86,8 @@ selectedteste: number=0;
     console.log(this.total);
     console.log(this.data.totalProduct);
     this.total=this.total + this.totalProduct;
-    console.log(this.total);
-    this.requests= await this.httpService.put('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedteste, total: this.total,prodRequests: this.product, fkRequests: this.data.fkRequests} );
+    console.log(this.data.fkClients);
+    this.requests= await this.httpService.put('requests', {fkClients: this.data.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.data.fkAddress, total: this.total,prodRequests: this.product, fkRequests: this.data.fkRequests} );
     this.onNoClick();
     }
   public insertTotalQtd(){
