@@ -202,3 +202,45 @@ knl.patch('requests/:id', async(req,resp)=>{
     resp.json(result);
     resp.end();
 })
+knl.post('prodRequests', async(req,resp)=>{
+    const schema =Joi.object({
+        fkRequests: Joi.number().min(1).required(),
+        prodRequests : Joi.array().items(Joi.object({
+            fkProducts:Joi.number().min(1).required(),
+            amount:Joi.number().min(1).max(999999).required(),
+            unitPrice:Joi.number().min(1).max(9999999999).required(),
+            discount:Joi.number().min(0).max(100).required(),
+            increase:Joi.number().min(0).max(100).required(),
+            total:Joi.number().min(1).max(9999999999).required(),
+            
+        }))
+        
+    })
+    knl.validate(req.body, schema);
+    for (const prodRequests of req.body.prodRequests){
+        const result2 = knl.sequelize().models.ProdRequests.build({
+            fkRequests : req.body.fkRequests,
+            fkProducts : prodRequests.fkProducts,
+            amount : prodRequests.amount,
+            unitPrice : prodRequests.unitPrice,
+            discount : prodRequests.discount,
+            increase: prodRequests.increase,
+            total:prodRequests.total,
+            status: 1
+        })  
+        await result2.save();      
+    } 
+    resp.end();
+})
+knl.patch("requestsAdd/:id", async(req,resp)=>{
+    const result = await knl.sequelize().models.Requests.update({
+        total: req.body.total
+    },
+    {
+    where:{
+        id:req.params.id
+        }
+    });
+    resp.send(result);
+    resp.end();
+})

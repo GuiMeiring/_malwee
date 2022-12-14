@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpService } from 'src/services/HttpService';
+import { ModalAddProductRequestsComponent } from '../modal-add-product-requests/modal-add-product-requests.component';
 import { ModalDeleteProductRequestsComponent } from '../modal-delete-product-requests/modal-delete-product-requests.component';
 import { ModalEditProductRequestsComponent } from '../modal-edit-product-requests/modal-edit-product-requests.component';
 export interface DialogDataRequests {
@@ -73,6 +74,17 @@ export class ModalEditRequestsComponent implements OnInit {
       })
 
     }
+    openAddProduct(){
+        const dialogoRef = this.dialog.open(ModalAddProductRequestsComponent, {
+          width: '600px',
+          
+          data: { id: this.data.id, total: this.data.total}
+        });
+        dialogoRef.afterClosed().subscribe((result : any) => {
+          this.listaProducts();
+        })
+  
+      }
     onNoClick(): void {
       this.dialogRef.close();
     }

@@ -45,6 +45,7 @@ import { ModalProRequestsComponent } from './modal-pro-requests/modal-pro-reques
 import { ModalEditRequestsComponent } from './modal-edit-requests/modal-edit-requests.component';
 import { ModalDeleteProductRequestsComponent } from './modal-delete-product-requests/modal-delete-product-requests.component';
 import { ModalEditProductRequestsComponent } from './modal-edit-product-requests/modal-edit-product-requests.component';
+import { ModalAddProductRequestsComponent } from './modal-add-product-requests/modal-add-product-requests.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { ModalEditProductRequestsComponent } from './modal-edit-product-requests
     ModalProRequestsComponent,
     ModalEditRequestsComponent,
     ModalDeleteProductRequestsComponent,
-    ModalEditProductRequestsComponent
+    ModalEditProductRequestsComponent,
+    ModalAddProductRequestsComponent
   ],
   imports: [
     RoutesModule,
