@@ -26,7 +26,7 @@
    <!-------------------------------------------------------------------------------------------------->
 <br>
 <div *ngIf="fkClients!=0">
-  <app-dropdown [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedteste"></app-dropdown> 
+  <app-dropdown [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedAddress"></app-dropdown> 
 </div>
 
 <mat-form-field class="example-40-width" appearance="fill">
@@ -57,7 +57,7 @@
 
   <mat-card-content>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Endereço</mat-label>
+      <mat-label>Produto</mat-label>
       <input matInput placeholder="Digite o produto"  type="text" [(ngModel)]="description" maxlength="100" minlength="2">
     </mat-form-field>
      <!-------------------------------------------------------------------------------------------------->
@@ -78,19 +78,19 @@
     </mat-form-field>
     <mat-form-field class="example-30-width ">
       <mat-label>Preço unitário</mat-label>
-        <input matInput  [(ngModel)]="unitPrice">
+        <input matInput  [(ngModel)]="unitPrice" readonly="true">
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Desconto</mat-label>
-        <input matInput [(ngModel)]="discount" (blur)="insertTotalDesc()" minlength="1" maxlength="4" required>
+        <input matInput [(ngModel)]="discount" type="number" (blur)="insertTotalDesc()" min="0" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Acrescimo</mat-label>
-        <input matInput [(ngModel)]="increase" (blur)="insertTotalAcres()" minlength="1" maxlength="4" required>
+        <input matInput [(ngModel)]="increase" type="number" (blur)="insertTotalAcres()" min="0" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Total</mat-label>
-        <input matInput [(ngModel)]="totalProduct" minlength="4" maxlength="1000000000000" required>
+        <input matInput [(ngModel)]="totalProduct2" minlength="4" maxlength="1000000000000" required  readonly="true">
     </mat-form-field>
   </div>
 </div>

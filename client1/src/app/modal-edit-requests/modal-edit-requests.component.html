@@ -45,7 +45,7 @@
     <mat-tab label="Editar">
         <mat-card-content>
         <br>
-        <app-dropdown class="example-35-width" [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedAddress"></app-dropdown> 
+    
         <br>
         <mat-form-field class="example-35-width" appearance="fill">
             <mat-label>Data de Emissão</mat-label>
@@ -61,6 +61,8 @@
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2 startView="year" [startAt]="DateDelivery"></mat-datepicker>
                   </mat-form-field>
+                  <br>
+                  <app-dropdown [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedAddress"></app-dropdown> 
         </mat-card-content>
         <mat-card-actions>
             <button  mat-raised-button color="primary">Editar</button>

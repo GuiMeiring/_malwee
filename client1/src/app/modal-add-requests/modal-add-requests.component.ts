@@ -24,9 +24,7 @@ export class ModalAddRequestsComponent implements OnInit {
   search: string ='';
   client : Array<any>= [];
   startDate : Date = new Date();
-  DateDelivery: any;
-  startdate : any;
-  dia: number | undefined;
+  DateDelivery: Date = new Date();
   nameClient: string ='';
   fkClients: number =0;
   address: Array<any>=[];
@@ -40,9 +38,9 @@ increase: number =0;
 totalProduct: any;
 total: number =0;
 description: string='';
+selectedAddress: number=0;
 denovo : number=0;
-totalString: string='';
-selectedteste: number=0;
+totalProduct2: number=0;
 
 
   constructor(public dialogRef: MatDialogRef<ModalAddRequestsComponent>, private httpService : HttpService,
@@ -55,14 +53,7 @@ selectedteste: number=0;
         console.log(teste1)
     await this.listarProducts();
     this.requests.push(this.data.requests);
-    let dia =String(this.startDate.getDate()).padStart(2,'0');
-    let mes =String(this.startDate.getMonth()+1).padStart(2,'0');
-    let ano =this.startDate.getFullYear();
-    this.dia = parseInt(dia)+7;
-    this.DateDelivery= new Date(`${ano}/${mes}/${this.dia}`);
-    
     await this.get();
-    
     await this.listaClients();
 
   }
@@ -78,6 +69,7 @@ selectedteste: number=0;
     this.fkProducts=id;
     this.description= description;
     this.totalProduct=salePrice;
+    this.totalProduct2= this.totalProduct;
     this.denovo=1;
     
     this.unitPrice= salePrice;
@@ -114,30 +106,27 @@ selectedteste: number=0;
     async addEndereco(){
      console.log(this.fkProducts) ;
       this.description='';
-      this.listaProduct.push({"fkProducts": this.fkProducts, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct})
+      this.listaProduct.push({"fkProducts": this.fkProducts, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct2})
       console.log(this.product);
-      this.total=+ this.totalProduct;
+      this.total=+ this.totalProduct2;
       this.denovo=0;
     }
     async addRequests() {
       console.log(this.fkClients);
-      this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedteste, total: this.total,prodRequests: this.listaProduct} );
+      this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.total,prodRequests: this.listaProduct} );
       this.onNoClick();
       }
       public insertTotalQtd(){
         console.log(this.amount);
-        this.totalProduct=this.totalProduct * this.amount;
-
-        this.totalString= this.totalProduct.toFixed(2);
-        console.log(this.totalString)
+        this.totalProduct2= this.totalProduct * this.amount;
       }
       public insertTotalDesc(){
-        this.totalProduct=this.totalProduct-((this.totalProduct *this.discount)/100);
+        this.totalProduct2=this.totalProduct-((this.totalProduct2 *this.discount)/100);
         console.log(this.totalProduct);
       }
       public insertTotalAcres(){
-        this.totalProduct=this.totalProduct+((this.totalProduct *this.increase)/100);
-        this.totalProduct= this.totalProduct.toFixed(2);
+        this.totalProduct2=this.totalProduct+((this.totalProduct2 *this.increase)/100);
+        this.totalProduct2= this.totalProduct.toFixed(2);
         
       }
 

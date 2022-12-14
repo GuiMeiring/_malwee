@@ -28,8 +28,8 @@ export class ModalEditRequestsComponent implements OnInit {
   requests: Array<any>=[];
   products: Array<any>=[];
   address: Array<any>=[];
+  startDate: Date=new Date();
   selectedAddress: number=this.data.fkAddress;
-  startDate: Date= this.data.DateEmisson;
   DateDelivery: Date= this.data.DateDelivery;
 
   constructor(public dialogRef: MatDialogRef<ModalEditRequestsComponent>, private httpService : HttpService,
@@ -48,7 +48,7 @@ export class ModalEditRequestsComponent implements OnInit {
     console.log(this.products);
   }
   async listaAddress(){
-        this.address= await this.httpService.get(`client/${this.data.id}`);
+        this.address= await this.httpService.get(`client/${this.data.fkClients}`);
         console.log(this.address);
    }
    openDeleteProduct(id: any, salePrice: number, fkProduct: number,totalProduct: number, fkRequests: number ){
@@ -94,4 +94,5 @@ export class ModalEditRequestsComponent implements OnInit {
       this.requests= await this.httpService.patch(`requests/${this.data.id}`,{});
       this.onNoClick();
     }
+   
   }
