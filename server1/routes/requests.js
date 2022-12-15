@@ -67,6 +67,51 @@ knl.post('requests', async(req, resp) =>{
 
     resp.end();
 }, securityConsts.USER_TYPE_PUBLIC);
+
+knl.get('requests/:id', async (req, resp)=>{
+    let result =await knl.sequelize().models.Requests.findAll({
+        where: {
+            status:1,
+            id: req.params.id
+        }
+    });
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let requests of result){
+            const client = await knl.sequelize().models.Clients.findAll({
+                where : {
+                    id : requests.fkClients
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(client)){
+                requests.client_name = client[0].name
+            }
+
+            console.log(requests.client_name)
+        }
+    }
+    result = knl.objects.copy(result);
+
+    if (!knl.objects.isEmptyArray(result)){
+        for(let requests of result){
+            const address = await knl.sequelize().models.Endereco.findAll({
+                where : {
+                    id : requests.fkAddress
+                }
+            })
+
+            if (!knl.objects.isEmptyArray(address)){
+                requests.address_rua = address[0].rua
+            }
+
+            console.log(requests.address_rua)
+        }
+    }
+    resp.json(result);
+    resp.end();
+})
 knl.get('requests', async (req, resp)=>{
     let result =await knl.sequelize().models.Requests.findAll({
         where: {
@@ -110,7 +155,7 @@ knl.get('requests', async (req, resp)=>{
     resp.json(result);
     resp.end();
 })
-knl.get('requests/:id', async (req, resp)=>{
+knl.get('ProdRequests/:id', async (req, resp)=>{
     
     let result =await knl.sequelize().models.ProdRequests.findAll({
         where: {
@@ -151,7 +196,7 @@ knl.put('requests', async(req,resp)=>{
         }
     });
 
-    for (const prodRequests of  req.body.prodRequests){
+    for (const prodRequests of req.body.prodRequests){
         const result2 = knl.sequelize().models.ProdRequests.update({
             fkProducts : prodRequests.fkProducts,
             amount : prodRequests.amount,
@@ -166,7 +211,6 @@ knl.put('requests', async(req,resp)=>{
             }
         })  
     }
-    resp.send(result);
     resp.end();
 });
 knl.patch('ProdRequests/:id', async(req,resp)=>{

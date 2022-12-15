@@ -65,7 +65,7 @@
                   <app-dropdown [array]="address" [idField]="'id'" [textField]="'rua'" [title]="'Endereços'" [(ngModel)]="selectedAddress"></app-dropdown> 
         </mat-card-content>
         <mat-card-actions>
-            <button  mat-raised-button color="primary">Editar</button>
+            <button  mat-raised-button color="primary" (click)="editRequests()">Editar</button>
         </mat-card-actions>
         <hr>
         <mat-card-content>

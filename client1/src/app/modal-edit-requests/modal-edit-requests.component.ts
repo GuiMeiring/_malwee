@@ -36,15 +36,19 @@ export class ModalEditRequestsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data : DialogDataRequests, private dialog : MatDialog) { }
 
   async ngOnInit(){
-    this.requests.push(this.data.requests);
     await this.listaProducts();
+    await this.listaRequests();
     await this.listaAddress();
     
     
 
   }
+  async listaRequests(){
+    this.requests=  await this.httpService.get(`requests/${this.data.id}`);
+    console.log(this.requests);
+  }
   async listaProducts(){
-    this.products=  await this.httpService.get(`requests/${this.data.id}`);
+    this.products=  await this.httpService.get(`ProdRequests/${this.data.id}`);
     console.log(this.products);
   }
   async listaAddress(){
@@ -71,6 +75,7 @@ export class ModalEditRequestsComponent implements OnInit {
       });
       dialogoRef.afterClosed().subscribe((result : any) => {
         this.listaProducts();
+        this.listaRequests();
       })
 
     }
@@ -82,6 +87,7 @@ export class ModalEditRequestsComponent implements OnInit {
         });
         dialogoRef.afterClosed().subscribe((result : any) => {
           this.listaProducts();
+          this.listaRequests();
         })
   
       }
@@ -94,5 +100,12 @@ export class ModalEditRequestsComponent implements OnInit {
       this.requests= await this.httpService.patch(`requests/${this.data.id}`,{});
       this.onNoClick();
     }
+    
+    async editRequests() {
+      console.log(this.data.id);
+    console.log(this.products);
+      this.requests= await this.httpService.put('requests', {fkClients: this.data.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.data.total,prodRequests: this.products, fkRequests: this.data.id} );
+      this.onNoClick();
+      }
    
   }

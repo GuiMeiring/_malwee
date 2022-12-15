@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
             type : Sequelize.INTEGER.UNSIGNED,
             primaryKey : true,
             autoIncrement : true,
-            allowNull : false
+            allowNull : true
         },
         status:{
             type : Sequelize.INTEGER,
@@ -14,31 +14,31 @@ module.exports = (sequelize) => {
         },
         fkRequests:{
             type : Sequelize.INTEGER,
-            allowNull : false
+            allowNull : true
         },
         fkProducts:{
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         amount:{
             type: Sequelize.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         unitPrice:{
             type: Sequelize.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         discount:{
             type: Sequelize.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         increase:{
             type: Sequelize.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         total:{
             type:Sequelize.DECIMAL(10,2),
-            allowNull:false
+            allowNull:true
         },
     })
 }
