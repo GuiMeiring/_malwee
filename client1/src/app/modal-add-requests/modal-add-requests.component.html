@@ -74,7 +74,7 @@
     <div *ngIf="denovo ==1">
     <mat-form-field class="example-30-width ">
         <mat-label>Quantidade</mat-label>
-        <input matInput type="number"[(ngModel)]="amount" (blur)="insertTotalQtd()" min="1" max="100" required>
+        <input matInput type="number"[(ngModel)]="amount" (blur)="calculaTotal()" min="1" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
       <mat-label>Preço unitário</mat-label>
@@ -82,11 +82,11 @@
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Desconto</mat-label>
-        <input matInput [(ngModel)]="discount" type="number" (blur)="insertTotalDesc()" min="0" max="100" required>
+        <input matInput [(ngModel)]="discount" type="number" (blur)="calculaTotal()" min="0" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Acrescimo</mat-label>
-        <input matInput [(ngModel)]="increase" type="number" (blur)="insertTotalAcres()" min="0" max="100" required>
+        <input matInput [(ngModel)]="increase" type="number" (blur)="calculaTotal()" min="0" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Total</mat-label>

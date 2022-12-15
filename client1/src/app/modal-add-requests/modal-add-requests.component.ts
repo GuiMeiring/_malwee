@@ -32,7 +32,7 @@ export class ModalAddRequestsComponent implements OnInit {
   rua: string='';
   fkProducts: number =0;
   amount: number=1;
-  unitPrice: number | undefined;
+  unitPrice: number=0;
 discount: number =0;
 increase: number =0;
 totalProduct: any;
@@ -41,6 +41,9 @@ description: string='';
 selectedAddress: number=0;
 denovo : number=0;
 totalProduct2: number=0;
+totalProductDesc: number=0;
+totalProductAcre: number =0;
+salePrice: number=0;
 
 
   constructor(public dialogRef: MatDialogRef<ModalAddRequestsComponent>, private httpService : HttpService,
@@ -68,11 +71,10 @@ totalProduct2: number=0;
     console.log(id)
     this.fkProducts=id;
     this.description= description;
-    this.totalProduct=salePrice;
-    this.totalProduct2= this.totalProduct;
     this.denovo=1;
     
     this.unitPrice= salePrice;
+    this.totalProduct2= this.unitPrice;
     this.product= await this.httpService.get(`products/${id}`);
       console.log(this.product);
     }
@@ -108,26 +110,22 @@ totalProduct2: number=0;
       this.description='';
       this.listaProduct.push({"fkProducts": this.fkProducts, "amount": this.amount, "unitPrice":this.unitPrice,"discount":this.discount,"increase":this.increase, "total": this.totalProduct2})
       console.log(this.product);
-      this.total=+ this.totalProduct2;
+      this.total=this.total+ this.totalProduct2;
+      console.log(this.total);
+      this.amount=1;
       this.denovo=0;
     }
+    
     async addRequests() {
       console.log(this.fkClients);
       this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.total,prodRequests: this.listaProduct} );
       this.onNoClick();
       }
-      public insertTotalQtd(){
-        console.log(this.amount);
-        this.totalProduct2= this.totalProduct * this.amount;
-      }
-      public insertTotalDesc(){
-        this.totalProduct2=this.totalProduct-((this.totalProduct2 *this.discount)/100);
-        console.log(this.totalProduct);
-      }
-      public insertTotalAcres(){
-        this.totalProduct2=this.totalProduct+((this.totalProduct2 *this.increase)/100);
-        this.totalProduct2= this.totalProduct.toFixed(2);
-        
+      calculaTotal(){
+        let descontoFinal = this.discount/100 * this.unitPrice;
+        let aumentoFinal = this.increase/100 * this.unitPrice;
+        let valorUnitarioL = this.unitPrice - descontoFinal + aumentoFinal;
+        this.totalProduct2 = valorUnitarioL * this.amount;
       }
 
 }

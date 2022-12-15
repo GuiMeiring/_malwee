@@ -1,24 +1,24 @@
 <mat-card-content>
-<mat-form-field class="example-30-width ">
-    <mat-label>Quantidade</mat-label>
-    <input matInput type="number"[(ngModel)]="amount" (blur)="insertTotalQtd()" min="1" max="100" required>
-</mat-form-field>
-<mat-form-field class="example-30-width ">
-  <mat-label>Preço unitário</mat-label>
-    <input matInput  [(ngModel)]="unitPrice">
-</mat-form-field>
-<mat-form-field class="example-30-width ">
-    <mat-label>Desconto</mat-label>
-    <input matInput [(ngModel)]="discount" (blur)="insertTotalDesc()" minlength="1" maxlength="4" required>
-</mat-form-field>
-<mat-form-field class="example-30-width ">
-    <mat-label>Acrescimo</mat-label>
-    <input matInput [(ngModel)]="increase" (blur)="insertTotalAcres()" minlength="1" maxlength="4" required>
-</mat-form-field>
-<mat-form-field class="example-30-width ">
-    <mat-label>Total</mat-label>
-    <input matInput [(ngModel)]="totalProduct" minlength="4" maxlength="1000000000000" required>
-</mat-form-field>
+    <mat-form-field class="example-30-width ">
+        <mat-label>Quantidade</mat-label>
+        <input matInput type="number"[(ngModel)]="amount" (blur)="calculaTotal()" min="1" max="100" required>
+    </mat-form-field>
+    <mat-form-field class="example-30-width ">
+      <mat-label>Preço unitário</mat-label>
+        <input matInput  [(ngModel)]="unitPrice" readonly="true">
+    </mat-form-field>
+    <mat-form-field class="example-30-width ">
+        <mat-label>Desconto</mat-label>
+        <input matInput [(ngModel)]="discount" type="number" (blur)="calculaTotal()" min="0" max="100" required>
+    </mat-form-field>
+    <mat-form-field class="example-30-width ">
+        <mat-label>Acrescimo</mat-label>
+        <input matInput [(ngModel)]="increase" type="number" (blur)="calculaTotal()" min="0" max="100" required>
+    </mat-form-field>
+    <mat-form-field class="example-30-width ">
+        <mat-label>Total</mat-label>
+        <input matInput [(ngModel)]="totalProduct2" minlength="4" maxlength="1000000000000" required  readonly="true">
+    </mat-form-field>
 </mat-card-content>
 <mat-card-actions>
 <button mat-raised-button color="primary" (click)="put()">Adicionar produtos</button>
