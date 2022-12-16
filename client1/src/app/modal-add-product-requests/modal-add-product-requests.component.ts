@@ -14,7 +14,7 @@ export interface DialogDataRequests {
   fkProduct: number;
   totalProduct: number;
   fkRequests: number;
-} 
+}
 @Component({
   selector: 'app-modal-add-product-requests',
   templateUrl: './modal-add-product-requests.component.html',
@@ -57,27 +57,19 @@ increase: number=0;
     console.log(id)
     this.fkProducts=id;
     this.description= description;
-    this.totalProduct=salePrice;
-    this.denovo=1;
-    
     this.unitPrice= salePrice;
+
+    this.totalProduct = this.unitPrice;
     this.product= await this.httpService.get(`products/${id}`);
       console.log(this.product);
     }
-    public insertTotalQtd(){
-      console.log(this.amount);
-      this.totalProduct=this.totalProduct * this.amount;
+    calculaTotal(){
+      let descontoFinal = this.discount/100 * this.unitPrice;
+      let aumentoFinal = this.increase/100 * this.unitPrice;
+      let valorUnitarioL = this.unitPrice - descontoFinal + aumentoFinal;
+      this.totalProduct = valorUnitarioL * this.amount;
+    }
 
-     
-    }
-    public insertTotalDesc(){
-      this.totalProduct=this.totalProduct-((this.totalProduct *this.discount)/100);
-      console.log(this.totalProduct);
-    }
-    public insertTotalAcres(){
-      this.totalProduct=this.totalProduct+((this.totalProduct *this.increase)/100);
-      
-    }
 
     async addListaProduct(){
       this.description='';

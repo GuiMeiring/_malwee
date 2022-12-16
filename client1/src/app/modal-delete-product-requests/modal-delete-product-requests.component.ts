@@ -26,7 +26,7 @@ export interface DialogDataRequests {
 
 export class ModalDeleteProductRequestsComponent implements OnInit {
   product: Array<any>=[];
-  total: number=0;
+  total2: number=0;
 
   constructor(public dialogRef: MatDialogRef<ModalDeleteProductRequestsComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : DialogDataRequests) { }
@@ -34,10 +34,10 @@ export class ModalDeleteProductRequestsComponent implements OnInit {
   ngOnInit(): void {
   }
   async deleteAddress() {
-    this.total=this.data.total- this.data.totalProduct;
-    this.product= await this.httpService.patch(`ProdRequests/${localStorage.getItem("idProductRequestsEdit")}`,{total: this.total, fkRequests: this.data.fkRequests});
+    this.total2 = parseFloat(`${this.data.total}`) - parseFloat(`${this.data.totalProduct}`);
+    this.product= await this.httpService.patch(`ProdRequests/${localStorage.getItem("idProductRequestsEdit")}`,{total: this.total2, fkRequests: this.data.fkRequests});
     this.onNoClick();
-   
+
     }
     onNoClick(): void {
       this.dialogRef.close();

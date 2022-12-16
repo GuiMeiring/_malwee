@@ -14,29 +14,27 @@
     </tr>
   </table>
   <div *ngFor="let product of product">
-    <div *ngIf="denovo ==1">
     <mat-form-field class="example-30-width ">
         <mat-label>Quantidade</mat-label>
-        <input matInput type="number"[(ngModel)]="amount" (blur)="insertTotalQtd()" min="1" max="100" required>
+        <input matInput type="number"[(ngModel)]="amount" (blur)="calculaTotal()" min="1" max="100" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
       <mat-label>Preço unitário</mat-label>
-        <input matInput  [(ngModel)]="unitPrice">
+        <input matInput  [(ngModel)]="unitPrice" readonly="true">
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Desconto</mat-label>
-        <input matInput [(ngModel)]="discount" (blur)="insertTotalDesc()" minlength="1" maxlength="4" required>
+        <input matInput [(ngModel)]="discount" (blur)="calculaTotal()" minlength="1" maxlength="4" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Acrescimo</mat-label>
-        <input matInput [(ngModel)]="increase" (blur)="insertTotalAcres()" minlength="1" maxlength="4" required>
+        <input matInput [(ngModel)]="increase" (blur)="calculaTotal()" minlength="1" maxlength="4" required>
     </mat-form-field>
     <mat-form-field class="example-30-width ">
         <mat-label>Total</mat-label>
-        <input matInput [(ngModel)]="totalProduct" minlength="4" maxlength="1000000000000" required>
+        <input matInput [(ngModel)]="totalProduct" minlength="4" maxlength="1000000000000" required readonly="true">
     </mat-form-field>
   </div>
-</div>
 </mat-card-content>
     <mat-card-actions>
     <button mat-raised-button color="primary" (click)="addListaProduct()">Adicionar produto</button>

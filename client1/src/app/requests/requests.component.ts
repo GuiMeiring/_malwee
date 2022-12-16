@@ -25,7 +25,7 @@ export interface DialogDataRequests {
   styleUrls: ['./requests.component.scss']
 })
 export class RequestsComponent implements OnInit {
-  
+
 search: any;
 add: any;
 requests: Array<any>=[];
@@ -49,7 +49,7 @@ requests: Array<any>=[];
     const ref = this.dialog.open(ModalEditRequestsComponent,{
       width: '800px',
       data:{id : id, requests: requests, fkClients: fkClients, DateEmission: DateEmission,DateDelivery: DateDelivery, fkAddress: fkAddress, total: total }
-      
+
     });
     ref.afterClosed().subscribe((result: any) =>{
       this.listRequests();
@@ -57,6 +57,7 @@ requests: Array<any>=[];
 
   }
   
+
   async listRequests(){
     this.requests= await this.httpService.get('requests');
 
