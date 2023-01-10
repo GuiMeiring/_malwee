@@ -33,7 +33,7 @@ export class ModalAddAddressComponent implements OnInit {
   ngOnInit(): void {
   }
   consultaCep(){
-    
+
     this.CepService.get(String(this.cep)).subscribe((dados: any) => this.populaForm(dados));
   }
 
@@ -47,9 +47,10 @@ export class ModalAddAddressComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  public add(){
-    this.addAddress();
-    this.editClient();
+  async  add(){
+    await this.addAddress();
+    await this.editClient();
+    this.onNoClick();
   }
   public refresh(){
     this.rua='';
@@ -77,11 +78,10 @@ export class ModalAddAddressComponent implements OnInit {
     console.log(this.data.razaoSocial);
     console.log(this.data.id);
     console.log(this.address);
-    
+
     this.client= await this.httpService.post(`client/${this.data.id}`,{address: this.address});
-    this.onNoClick();
-  
+
   }
-  
+
 
 }

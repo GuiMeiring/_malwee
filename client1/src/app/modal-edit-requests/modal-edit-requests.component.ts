@@ -39,8 +39,8 @@ export class ModalEditRequestsComponent implements OnInit {
     await this.listaProducts();
     await this.listaRequests();
     await this.listaAddress();
-    
-    
+
+
 
   }
   async listaRequests(){
@@ -52,7 +52,7 @@ export class ModalEditRequestsComponent implements OnInit {
     console.log(this.products);
   }
   async listaAddress(){
-        this.address= await this.httpService.get(`client/${this.data.fkClients}`);
+        this.address= await this.httpService.get(`clientEndereco/${this.data.fkClients}`);
         console.log(this.address);
    }
    openDeleteProduct(id: any, salePrice: number, fkProduct: number,totalProduct: number, fkRequests: number ){
@@ -63,49 +63,50 @@ export class ModalEditRequestsComponent implements OnInit {
     });
     dialogoRef.afterClosed().subscribe((result : any) => {
       this.listaProducts();
+      this.listaRequests();
     })
   }
-  openEditProduct(id: any, salePrice: number, fkProduct: number,totalProduct: number, fkRequests: number ){
+   openEditProduct(id: any, salePrice: number, fkProduct: number,totalProduct: number, fkRequests: number ){
     console.log(salePrice);
     window.localStorage.setItem('idProductRequestsEdit', id);
       const dialogoRef = this.dialog.open(ModalEditProductRequestsComponent, {
         width: '600px',
-        
+
         data: {requests: this.data.requests, id: this.data.id, fkClients: this.data.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.data.total,prodRequests: this.products, salePrice : salePrice, fkProduct: fkProduct, totalProduct: totalProduct, fkRequests: fkRequests}
       });
-      dialogoRef.afterClosed().subscribe((result : any) => {
-        this.listaProducts();
-        this.listaRequests();
+      dialogoRef.afterClosed().subscribe(async (result : any) => {
+          this.listaProducts();
+         this.listaRequests();
       })
 
     }
     openAddProduct(){
         const dialogoRef = this.dialog.open(ModalAddProductRequestsComponent, {
           width: '600px',
-          
+
           data: { id: this.data.id, total: this.data.total}
         });
         dialogoRef.afterClosed().subscribe((result : any) => {
           this.listaProducts();
           this.listaRequests();
         })
-  
+
       }
     onNoClick(): void {
       this.dialogRef.close();
     }
-  
-    
+
+
     async requestsDelete(){
       this.requests= await this.httpService.patch(`requests/${this.data.id}`,{});
       this.onNoClick();
     }
-    
+
     async editRequests() {
       console.log(this.data.id);
     console.log(this.products);
       this.requests= await this.httpService.put('requests', {fkClients: this.data.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.data.total,prodRequests: this.products, fkRequests: this.data.id} );
       this.onNoClick();
       }
-   
+
   }

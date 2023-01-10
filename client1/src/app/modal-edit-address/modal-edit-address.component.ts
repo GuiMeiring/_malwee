@@ -33,7 +33,7 @@ export class ModalEditAddressComponent implements OnInit {
   cnpj: number | undefined;
   razaoSocial: string ='';
   startDate : Date = new Date(2022, 0, 1);
-  
+
 
   constructor(public dialogRef: MatDialogRef<ModalEditAddressComponent>, private httpService : HttpService,
     @Inject(MAT_DIALOG_DATA) private data : DialogDataClient, private CepService : CepServiceService) { }
@@ -55,10 +55,10 @@ export class ModalEditAddressComponent implements OnInit {
    this.cidade = dados.localidade,
    this.estado = dados.uf
   }
-  public put(){
-    this.addAddress();
-    this.editClient();
-    this.onNoClick();
+  async  put(){
+    await this.addAddress();
+    await this.editClient();
+    this.dialogRef.close();
   }
   public refresh(){
     this.rua='';
@@ -85,10 +85,10 @@ export class ModalEditAddressComponent implements OnInit {
     console.log(this.data.name);
     console.log(this.data.razaoSocial);
     console.log(this.data.id);
-    
+
     this.client= await this.httpService.put(`client`,{name:this.data.name,razaoSocial: this.data.razaoSocial, idClient  : this.data.id, address: this.editEndereco, idEndereco : localStorage.getItem("idAddressEdit")});
-  
+
   }
-  
+
 
 }

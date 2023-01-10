@@ -66,13 +66,13 @@ salePrice: number=0;
 
 
   }
-  
+
   async addProduct(description:string, id: number, salePrice: number) {
     console.log(id)
     this.fkProducts=id;
     this.description= description;
     this.denovo=1;
-    
+
     this.unitPrice= salePrice;
     this.totalProduct2= this.unitPrice;
     this.product= await this.httpService.get(`products/${id}`);
@@ -87,7 +87,7 @@ salePrice: number=0;
           this.listaAddress();
       }
       async listaAddress(){
-        this.address= await this.httpService.get(`client/${this.fkClients}`);
+        this.address= await this.httpService.get(`clientEndereco/${this.fkClients}`);
         console.log(this.address);
 
 
@@ -102,8 +102,8 @@ salePrice: number=0;
     async listarProducts(){
       this.products= await this.httpService.get('products');
       console.log(this.products);
-  
-  
+
+
     }
     async addEndereco(){
      console.log(this.fkProducts) ;
@@ -114,8 +114,10 @@ salePrice: number=0;
       console.log(this.total);
       this.amount=1;
       this.denovo=0;
+      this.discount=0;
+      this.increase=0;
     }
-    
+
     async addRequests() {
       console.log(this.fkClients);
       this.requests= await this.httpService.post('requests', {fkClients: this.fkClients,  DateEmission: this.startDate, DateDelivery: this.DateDelivery, fkAddress: this.selectedAddress, total: this.total,prodRequests: this.listaProduct} );

@@ -46,8 +46,8 @@ export class ModalClientComponent implements OnInit {
     private dialog : MatDialog) { }
 
   ngOnInit(): void {
-    this.client.push(this.data.client);
     this.getClient();
+    this.getEndereco();
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -56,14 +56,18 @@ export class ModalClientComponent implements OnInit {
     this.client= await this.httpService.put(`client`,{name:this.name,razaoSocial: this.razaoSocial, idClient  : this.data.id, address: this.editEndereco, idEndereco : this.selectedEndereco});
   }
   async getClient(){
-    this.endereco= await this.httpService.get(`client/${this.data.id}`);
+    this.client = await this.httpService.get(`client/${this.data.id}`);
+    console.log(this.client);
+  }
+  async getEndereco(){
+    this.endereco= await this.httpService.get(`clientEndereco/${this.data.id}`);
     console.log(this.endereco);
   }
   async deleteClient(){
     this.client= await this.httpService.patch(`client/${this.data.id}`,{});
     this.dialogRef.close();
   }
-  public put(){
+  async put(){
     if(this.name ==''){
       this.name= this.data.name;
     }
@@ -72,8 +76,10 @@ export class ModalClientComponent implements OnInit {
     }
     console.log(this.name);
     console.log(this.razaoSocial);
-    this.addAddress();
-    this.editClient();
+    await this.addAddress();
+    await this.editClient();
+    await this.getClient();
+
   }
   public refresh(){
     this.selectedEndereco=0;
@@ -104,6 +110,7 @@ export class ModalClientComponent implements OnInit {
         data: {client: this.data.client, id : this.data.id, razaoSocial: this.data.razaoSocial, name : this.data.name}
     });
     dialogoRef.afterClosed().subscribe((result : any) => {
+      this.getEndereco();
       this.getClient();
     })
   }
@@ -113,6 +120,7 @@ export class ModalClientComponent implements OnInit {
       width: '400px',
     });
     dialogoRef.afterClosed().subscribe((result : any) => {
+      this.getEndereco();
       this.getClient();
     })
   }
@@ -122,21 +130,23 @@ export class ModalClientComponent implements OnInit {
         data: {client: this.data.client, id : this.data.id, razaoSocial: this.data.razaoSocial, name : this.data.name}
       });
       dialogoRef.afterClosed().subscribe((result : any) => {
+        this.getEndereco();
         this.getClient();
       })
   }
 
-    
-  
+
+
   async deleteAddress(id : any) {
     this.endereco= await this.httpService.patch(`ClientsEndereco/${id}`,{});
+    this.getEndereco();
     this.getClient();
-   
+
     }
     cancelar(){
       this.selectedEndereco=0;
     }
-    
+
 }
 
 

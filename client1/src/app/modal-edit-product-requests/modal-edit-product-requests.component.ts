@@ -71,9 +71,9 @@ totalProduct2: number=0;
 
       }
 
-  public put(){
-    this.addProduct();
-    this.editRequests();
+  async put(){
+    await this.addProduct();
+    await this.editRequests();
     this.onNoClick();
   }
   async addProduct(){

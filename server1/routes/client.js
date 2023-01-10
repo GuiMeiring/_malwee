@@ -77,11 +77,21 @@ knl.get('client', async (req, resp)=>{
     resp.end();
 })
 
-knl.get('client/:id', async (req, resp)=>{
+knl.get('clientEndereco/:id', async (req, resp)=>{
     
     const result2 =await knl.sequelize().models.Endereco.findAll({
         where: {
             fkClients: req.params.id,
+            status:1
+        }
+    });
+    resp.send(result2);
+})
+knl.get('client/:id', async (req, resp)=>{
+    
+    const result2 =await knl.sequelize().models.Clients.findAll({
+        where: {
+            id: req.params.id,
             status:1
         }
     });
